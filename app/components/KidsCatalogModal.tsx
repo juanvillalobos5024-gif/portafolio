@@ -522,89 +522,107 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                   }
                 }}
               >
-              {/* PÁGINA 1 - PORTADA */}
-              <Page number={1} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.coverImage || '/catalogo/portada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.7)' }}></div>
-              </Page>
-
-              {hasIndex && (
-                <>
-                  <Page number={2} isLeft={true}>
-                    <PageBackground side="left" variant="kids" />
+              {(() => {
+                const pages = [];
+                // PÁGINA 1 - PORTADA
+                pages.push(
+                  <Page key="cover" number={1} isCover={true}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.coverImage || '/catalogo/portada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.7)' }}></div>
                   </Page>
-                  <Page number={3} isRight={true}>
-                    <PageBackground side="right" variant="kids" />
-                    <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
-                      <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>Índice</h2>
-                      <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
-                    </div>
-                  </Page>
-                </>
-              )}
+                );
 
-              {/* PÁGINAS DE PERSONAJES */}
-              {Object.entries(kidsLicensesData).flatMap(([key, data], index) => {
-                const pageIndexOffset = 2 + indexOffset + (index * 2);
-                const currentViewOptions = Object.keys(data.views);
-                const activeView = characterViews[key] || currentViewOptions[0];
-                const imageSrc = data.views[activeView];
-
-                return [
-                  <Page key={`${key}-left`} number={pageIndexOffset} isLeft={true}>
-                    <PageBackground side="left" variant="kids" />
-                    <div style={{ position: 'relative', zIndex: 2, height: '100%', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
-                      <h2 className={styles.pageTitle}>{data.name}</h2>
-                      <div style={{ backgroundColor: 'rgba(255,255,255,0.4)', padding: '0.4rem', borderRadius: '6px', marginBottom: '0.6rem', marginTop: '0.4rem' }}>
-                        <h3 style={{color: 'var(--contex-green)', fontWeight: 'bold', fontSize: '1rem'}}>★ Licencia Oficial: {data.license}</h3>
+                if (hasIndex) {
+                  pages.push(
+                    <Page key="index-left" number={2} isLeft={true}>
+                      <PageBackground side="left" variant="kids" />
+                    </Page>
+                  );
+                  pages.push(
+                    <Page key="index-right" number={3} isRight={true}>
+                      <PageBackground side="right" variant="kids" />
+                      <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
+                        <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>Índice</h2>
+                        <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
                       </div>
+                    </Page>
+                  );
+                }
 
+                // PÁGINAS DE PERSONAJES
+                Object.entries(kidsLicensesData).forEach(([key, data], index) => {
+                  const pageIndexOffset = 2 + indexOffset + (index * 2);
+                  const currentViewOptions = Object.keys(data.views);
+                  const activeView = characterViews[key] || currentViewOptions[0];
+                  const imageSrc = data.views[activeView];
 
+                  pages.push(
+                    <Page key={`${key}-left`} number={pageIndexOffset} isLeft={true}>
+                      <PageBackground side="left" variant="kids" />
+                      <div style={{ position: 'relative', zIndex: 2, height: '100%', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
+                        <h2 className={styles.pageTitle}>{data.name}</h2>
+                        <div style={{ backgroundColor: 'rgba(255,255,255,0.4)', padding: '0.4rem', borderRadius: '6px', marginBottom: '0.6rem', marginTop: '0.4rem' }}>
+                          <h3 style={{color: 'var(--contex-green)', fontWeight: 'bold', fontSize: '1rem'}}>★ Licencia Oficial: {data.license}</h3>
+                        </div>
 
-                      <div className={styles.specsGrid} style={{ marginTop: '0.8rem', marginBottom: '0.8rem' }}>
-                        {(catalogData[key]?.features || []).map((feature: any) => (
-                          <div className={styles.specCard} key={feature.id}>
-                            <span className={styles.specTitle}>{feature.label}</span>
-                            <span className={styles.specValue}>{feature.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div style={{ marginTop: 'auto' }}>
-                        <h3 style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.4rem' }}>Vistas disponibles:</h3>
-                        <DesignPaletteContainer>
-                          {currentViewOptions.map(viewKey => (
-                             <DesignSwatch 
-                               key={viewKey}
-                               viewKey={viewKey}
-                               label={viewKey === 'frontal' ? 'Diseño 1' : viewKey === 'detalle1' ? 'Diseño 2' : viewKey === 'detalle2' ? 'Diseño 3' : viewKey}
-                               imageUrl={data.views[viewKey as keyof typeof data.views]}
-                               selected={activeView === viewKey}
-                               onClick={(e: any) => { e.stopPropagation(); setCharacterViews(prev => ({...prev, [key]: viewKey})); }}
-                             />
+                        <div className={styles.specsGrid} style={{ marginTop: '0.8rem', marginBottom: '0.8rem' }}>
+                          {(catalogData[key]?.features || []).map((feature: any) => (
+                            <div className={styles.specCard} key={feature.id}>
+                              <span className={styles.specTitle}>{feature.label}</span>
+                              <span className={styles.specValue}>{feature.value}</span>
+                            </div>
                           ))}
-                        </DesignPaletteContainer>
+                        </div>
+                        
+                        <div style={{ marginTop: 'auto' }}>
+                          <h3 style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.4rem' }}>Vistas disponibles:</h3>
+                          <DesignPaletteContainer>
+                            {currentViewOptions.map(viewKey => (
+                               <DesignSwatch 
+                                 key={viewKey}
+                                 viewKey={viewKey}
+                                 label={viewKey === 'frontal' ? 'Diseño 1' : viewKey === 'detalle1' ? 'Diseño 2' : viewKey === 'detalle2' ? 'Diseño 3' : viewKey}
+                                 imageUrl={data.views[viewKey as keyof typeof data.views]}
+                                 selected={activeView === viewKey}
+                                 onClick={(e: any) => { e.stopPropagation(); setCharacterViews(prev => ({...prev, [key]: viewKey})); }}
+                               />
+                            ))}
+                          </DesignPaletteContainer>
+                        </div>
                       </div>
-                    </div>
-                  </Page>,
-                  <Page key={`${key}-right`} number={pageIndexOffset + 1} isRight={true}>
-                    <HoverZoomImage 
-                      src={imageSrc} 
-                      alt={data.name}
-                      className={styles.pageImage}
-                    />
-                    <PageBackground side="right" variant="kids" />
-                    <div style={{position: 'absolute', bottom: '2%', right: '5%', color: 'var(--contex-dark)', padding: '0.5rem 1rem', zIndex: 10, fontWeight: 'bold', pointerEvents: 'none', backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '4px'}}>
-                      {data.name}
+                    </Page>
+                  );
+
+                  pages.push(
+                    <Page key={`${key}-right`} number={pageIndexOffset + 1} isRight={true}>
+                      <HoverZoomImage 
+                        src={imageSrc} 
+                        alt={data.name}
+                        className={styles.pageImage}
+                      />
+                      <PageBackground side="right" variant="kids" />
+                      <div style={{position: 'absolute', bottom: '2%', right: '5%', color: 'var(--contex-dark)', padding: '0.5rem 1rem', zIndex: 10, fontWeight: 'bold', pointerEvents: 'none', backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '4px'}}>
+                        {data.name}
+                      </div>
+                    </Page>
+                  );
+                });
+
+                // CONTRAPORTADA
+                const totalRealPages = 2 + indexOffset + (Object.keys(kidsLicensesData).length * 2);
+                pages.push(
+                  <Page key="backcover" number={totalRealPages} isCover={true}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.backCoverImage || '/catalogo/contraportada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.8)' }}></div>
+                    <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center', backgroundColor: 'rgba(0,0,0,0.3)' }}>
+                      <img src="/logo-contex.png" alt="Contex" style={{ width: '120px', filter: 'brightness(0) invert(1)', marginBottom: '1.5rem', opacity: 0.9 }} />
+                      <p style={{ color: 'white', fontSize: '0.85rem', maxWidth: '200px', margin: '0 auto', opacity: 0.8 }}>
+                        Diseños mágicos para sueños increíbles
+                      </p>
                     </div>
                   </Page>
-                ];
-              })}
+                );
 
-              {/* PÁGINA FINAL - CONTRAPORTADA */}
-              <Page number={2 + indexOffset + (Object.keys(kidsLicensesData).length * 2)} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.backCoverImage || '/catalogo/portada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.3)' }}></div>
-              </Page>
-
+                return pages;
+              })()}
             </HTMLFlipBook>
 
               {/* Stacked pages - left side (pages already read) */}

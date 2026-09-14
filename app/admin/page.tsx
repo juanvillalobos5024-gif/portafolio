@@ -16,7 +16,7 @@ import ContactSection from '../components/ContactSection';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 // Helper component for Drag and Drop Uploader
-const ImageUploader = ({ onUpload, onRemove, currentImage, currentAlt, onAltChange, isUploading, label = "Subir Imagen", hint = "Formatos JPG/PNG/WebP, Máx 2MB" }: any) => {
+const ImageUploader = ({ onUpload, onRemove, currentImage, currentAlt, onAltChange, onUrlChange, isUploading, label = "Subir Imagen", hint = "Formatos JPG/PNG/WebP, Máx 2MB" }: any) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
   const handleDrag = (e: React.DragEvent) => {
@@ -38,6 +38,17 @@ const ImageUploader = ({ onUpload, onRemove, currentImage, currentAlt, onAltChan
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%' }}>
+      {onUrlChange && (
+        <input 
+          type="text" 
+          className={styles.input} 
+          placeholder="Pegar URL de imagen HTTP/HTTPS..." 
+          value={currentImage || ''} 
+          onChange={(e) => onUrlChange(e.target.value)} 
+          style={{ fontSize: '0.8rem', marginBottom: '0.2rem' }}
+          title="Pega un enlace directo si no quieres subir un archivo"
+        />
+      )}
       <div 
         className={`${styles.dropzone} ${isDragActive ? styles.active : ''}`}
         onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}
@@ -557,6 +568,7 @@ export default function AdminDashboard() {
                 currentAlt={item.mainAlt}
                 onAltChange={(val: string) => handleNestedChange(catalogKey, subKey, 'mainAlt', val)}
                 onUpload={(e: any) => handleImageUpload(catalogKey, subKey, e)}
+                onUrlChange={(val: string) => handleNestedChange(catalogKey, subKey, 'mainImage', val)}
                 isUploading={isUploadingImage}
               />
             </div>
@@ -622,6 +634,7 @@ export default function AdminDashboard() {
                     currentAlt={c.alt}
                     onAltChange={(val: string) => handleUpdateColor(catalogKey, subKey, c.id, 'alt', val)}
                     onUpload={(e: any) => handleColorImageUpload(catalogKey, subKey, c.id, e)}
+                    onUrlChange={(val: string) => handleUpdateColor(catalogKey, subKey, c.id, 'image', val)}
                     isUploading={uploadingColorId === c.id}
                     hint="Imagen de detalle para este color (Opcional)"
                   />
@@ -710,6 +723,7 @@ export default function AdminDashboard() {
                     currentAlt={content.hero?.alt}
                     onAltChange={(val: string) => handleChange('hero', 'alt', val)}
                     onUpload={(e: any) => handleImageUpload('hero', 'hero', e)}
+                    onUrlChange={(val: string) => handleChange('hero', 'bgImage', val)}
                     onRemove={() => handleChange('hero', 'bgImage', '')}
                     isUploading={isUploadingImage}
                     hint="Formatos JPG/PNG/WebP, Máx 2MB. 1920x1080px recomendado"
@@ -733,6 +747,7 @@ export default function AdminDashboard() {
                       currentAlt={content.about?.alt}
                       onAltChange={(val: string) => handleChange('about', 'alt', val)}
                       onUpload={(e: any) => handleImageUpload('root', 'about', e)}
+                      onUrlChange={(val: string) => handleChange('about', 'image', val)}
                       onRemove={() => handleChange('about', 'image', '')}
                       isUploading={isUploadingImage}
                       hint="Formatos JPG/PNG/WebP, Máx 2MB."
@@ -883,6 +898,7 @@ export default function AdminDashboard() {
                   <ImageUploader 
                     currentImage={content.mainCatalogSettings?.coverImage}
                     onUpload={(e: any) => handleSettingsImageUpload('mainCatalogSettings', 'coverImage', e)}
+                    onUrlChange={(val: string) => handleChange('mainCatalogSettings', 'coverImage', val)}
                     onRemove={() => handleChange('mainCatalogSettings', 'coverImage', '')}
                     isUploading={isUploadingImage}
                     hint="Imagen de portada (Vertical, ej: 800x1200px)"
@@ -893,6 +909,7 @@ export default function AdminDashboard() {
                   <ImageUploader 
                     currentImage={content.mainCatalogSettings?.backCoverImage}
                     onUpload={(e: any) => handleSettingsImageUpload('mainCatalogSettings', 'backCoverImage', e)}
+                    onUrlChange={(val: string) => handleChange('mainCatalogSettings', 'backCoverImage', val)}
                     onRemove={() => handleChange('mainCatalogSettings', 'backCoverImage', '')}
                     isUploading={isUploadingImage}
                     hint="Imagen de contraportada (Vertical, ej: 800x1200px)"
@@ -956,6 +973,7 @@ export default function AdminDashboard() {
                   <ImageUploader 
                     currentImage={content.kidsCatalogSettings?.coverImage}
                     onUpload={(e: any) => handleSettingsImageUpload('kidsCatalogSettings', 'coverImage', e)}
+                    onUrlChange={(val: string) => handleChange('kidsCatalogSettings', 'coverImage', val)}
                     onRemove={() => handleChange('kidsCatalogSettings', 'coverImage', '')}
                     isUploading={isUploadingImage}
                     hint="Imagen de portada (Vertical, ej: 800x1200px)"
@@ -966,6 +984,7 @@ export default function AdminDashboard() {
                   <ImageUploader 
                     currentImage={content.kidsCatalogSettings?.backCoverImage}
                     onUpload={(e: any) => handleSettingsImageUpload('kidsCatalogSettings', 'backCoverImage', e)}
+                    onUrlChange={(val: string) => handleChange('kidsCatalogSettings', 'backCoverImage', val)}
                     onRemove={() => handleChange('kidsCatalogSettings', 'backCoverImage', '')}
                     isUploading={isUploadingImage}
                     hint="Imagen de contraportada (Vertical, ej: 800x1200px)"
