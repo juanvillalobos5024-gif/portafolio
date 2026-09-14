@@ -1,0 +1,41 @@
+.floatButton {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background-color: var(--contex-dark);
+  color: var(--contex-green);
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid var(--contex-green);
+}
+
+.floatButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(209, 230, 22, 0.4);
+  background-color: var(--contex-green);
+  color: var(--contex-dark);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 768px) {
+  .floatButton {
+    bottom: 2rem;
+    left: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-width: 1px;
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "hero": {
+    "title1": "Innovación y",
+    "title2": "excelencia textil",
+    "subtitle": "<p>Descubre&nbsp;nuestros&nbsp;catálogos&nbsp;de&nbsp;alta&nbsp;calidad&nbsp;para&nbsp;la&nbsp;industria&nbsp;hotelera&nbsp;e&nbsp;infantil.</p>",
+    "title": "CATALOGOS"
+  },
+  "about": {
+    "title": "Nuestra Historia",
+    "bodyHtml": "<p><strong>COMPAÑÍA&nbsp;NACIONAL&nbsp;DE&nbsp;TEXTILES</strong>&nbsp;ha&nbsp;forjado&nbsp;una&nbsp;destacada&nbsp;trayectoria&nbsp;en&nbsp;el&nbsp;sector,</p><p>consolidándose&nbsp;como&nbsp;referente&nbsp;gracias&nbsp;a&nbsp;su&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;calidad,&nbsp;innovación&nbsp;y&nbsp;sostenibilidad.&nbsp;</p><p>Desde&nbsp;sus&nbsp;inicios,&nbsp;ha&nbsp;tejido&nbsp;un&nbsp;camino&nbsp;de&nbsp;éxito,&nbsp;adaptándose&nbsp;a&nbsp;las&nbsp;tendencias&nbsp;del&nbsp;mercado&nbsp;y&nbsp;</p><p>destacando&nbsp;por&nbsp;su&nbsp;capacidad&nbsp;para&nbsp;ofrecer&nbsp;productos&nbsp;textiles&nbsp;como&nbsp;hamacas,&nbsp;toallas,&nbsp;</p><p>almohadas,&nbsp;sábanas,&nbsp;edredones,&nbsp;para&nbsp;el&nbsp;hogar&nbsp;y&nbsp;el&nbsp;sector&nbsp;hotelero.</p><p></p><p>Somos&nbsp;una&nbsp;empresa&nbsp;en&nbsp;constante&nbsp;avance&nbsp;y,&nbsp;nuestro&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;<em>sostenibilidad</em>&nbsp;se&nbsp;refleja</p><p>en&nbsp;la&nbsp;producción&nbsp;de&nbsp;Hilo&nbsp;reciclado&nbsp;para&nbsp;la&nbsp;elaboración&nbsp;de&nbsp;los&nbsp;productos&nbsp;textiles,&nbsp;abriendo&nbsp;paso&nbsp;hacia&nbsp;</p><p>una&nbsp;industria&nbsp;más&nbsp;responsable,&nbsp;marcando&nbsp;así&nbsp;el&nbsp;rumbo&nbsp;hacia&nbsp;un&nbsp;futuro&nbsp;textil&nbsp;más&nbsp;ecoamigable.</p><ul><li>Calidad&nbsp;garantizada</li><li>Sostenibilidad</li><li>Innovación&nbsp;textil</li></ul>"
+  },
+  "valueProposition": {
+    "title": "¿Por qué elegir Contex?",
+    "card1Title": "Calidad de Hilos",
+    "card1Desc": "Seleccionamos minuciosamente nuestras materias primas para garantizar acabados suaves y resistentes.",
+    "card2Title": "Alta Durabilidad",
+    "card2Desc": "Nuestros textiles están diseñados para soportar lavados industriales continuos sin perder su forma ni color.",
+    "card3Title": "Atención Hotelera",
+    "card3Desc": "Líneas especializadas de dotación con los más altos estándares para el sector turismo y hospitalidad.",
+    "card4Title": "Distribución Nacional",
+    "card4Desc": "Llegamos a cada rincón del país con logística eficiente y tiempos de entrega garantizados."
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "<p>Estamos&nbsp;aquí&nbsp;para&nbsp;ayudarte.&nbsp;Si&nbsp;tienes&nbsp;preguntas&nbsp;sobre&nbsp;nuestros&nbsp;productos,&nbsp;catálogos&nbsp;o&nbsp;pedidos&nbsp;al&nbsp;por&nbsp;mayor,&nbsp;no&nbsp;dudes&nbsp;en&nbsp;escribirnos.</p>",
+    "email": "ventas@contex.com.co",
+    "phone": "+57 (300) 000-0000",
+    "address": "Cl. 76 #7035"
+  },
+  "mainCatalog": {
+    "romana": {
+      "title": "Colección Romana",
+      "material": "100% Algodón",
+      "weight": "500 gr",
+      "dimensions": "70 x 140 cm",
+      "quality": "Suavidad Suavitech",
+      "features": [
+        {
+          "id": "a22e9734-59b3-408d-addc-8de32e0f311c",
+          "label": "MATERIAL",
+          "value": "100% ALGODON"
+        }
+      ],
+      "mainImage": "https://telaryhome.com/cdn/shop/files/COLECCIONROMANA20002000_be3f4a9c-dfd1-459b-86a2-944d81899896.jpg?v=1779908356",
+      "colors": [
+        {
+          "id": "11579214-6465-4f96-9091-5434f8040819",
+          "name": "Oro Chamgane",
+          "hex": "#e8d6b3",
+          "image": "/uploads/1788459247623-marron_imperial.webp"
+        },
+        {
+          "id": "860d7b6a-b15d-4b06-baee-91c84b515ad4",
+          "name": "",
+          "hex": "#cccccc",
+          "image": ""
+        }
+      ]
+    },
+    "royal": {
+      "title": "Colección Royal",
+      "material": "100% Algodón",
+      "weight": "600 gr",
+      "dimensions": "70 x 140 cm",
+      "quality": "Máxima Durabilidad"
+    },
+    "toscana": {
+      "title": "Línea Toscana",
+      "material": "100% Algodón Peinado",
+      "weight": "650 gr",
+      "dimensions": "80 x 150 cm",
+      "quality": "Premium",
+      "features": [],
+      "colors": [
+        {
+          "id": "c4ad7ab1-c567-49f4-bce5-244f041cd3ad",
+          "name": "verde lima",
+          "hex": "#4b7708",
+          "image": ""
+        },
+        {
+          "id": "dc9bda77-c987-4060-a125-c45d2ccb8c9d",
+          "name": "",
+          "hex": "#cccccc",
+          "image": ""
+        }
+      ]
+    },
+    "home": {
+      "title": "Colección Home",
+      "material": "Mezcla Optimizada",
+      "weight": "450 gr",
+      "dimensions": "70 x 140 cm",
+      "quality": "Secado Rápido"
+    },
+    "sonata": {
+      "title": "Línea Sonata",
+      "material": "Algodón Orgánico",
+      "weight": "550 gr",
+      "dimensions": "70 x 140 cm",
+      "quality": "Ecológico"
+    },
+    "tropical": {
+      "title": "Línea Tropical",
+      "material": "Microfibra Plus",
+      "weight": "400 gr",
+      "dimensions": "70 x 140 cm",
+      "quality": "Ultraligera"
+    },
+    "zafiro": {
+      "title": "Línea Zafiro",
+      "material": "Algodón Egipcio",
+      "weight": "700 gr",
+      "dimensions": "80 x 160 cm",
+      "quality": "Lujo Supremo"
+    },
+    "hamaca_tipica_ecologica": {
+      "title": "Hamaca Tipipica Ecologica",
+      "features": [
+        {
+          "id": "dacf7849-602d-429e-85ab-6bc1fc04cd8b",
+          "label": "MATERIAL",
+          "value": "ECOLOGICA"
+        }
+      ],
+      "mainImage": "https://telaryhome.com/cdn/shop/files/HECOLOGICA.png?v=1782226909"
+    }
+  },
+  "kidsCatalog": {
+    "chase": {
+      "title": "Chase (Paw Patrol)",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial",
+      "features": []
+    },
+    "skye": {
+      "title": "Skye (Paw Patrol)",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "cars": {
+      "title": "Cars",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "marie": {
+      "title": "Marie (Aristogatos)",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "mickey": {
+      "title": "Mickey Mouse",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "minnie": {
+      "title": "Minnie Mouse",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "stitch_nino": {
+      "title": "Stitch (Azul)",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "stitch_nina": {
+      "title": "Angel (Rosa)",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "spiderman": {
+      "title": "Spider-Man",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "spidey": {
+      "title": "Spidey",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "capitan_america": {
+      "title": "Capitán América",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "hulk": {
+      "title": "Hulk",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "thor": {
+      "title": "Thor",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    },
+    "ironman_hulk": {
+      "title": "Iron Man y Hulk",
+      "material": "100% Algodón Suavitech",
+      "weight": "320 gr",
+      "dimensions": "60 x 120 cm",
+      "quality": "Licencia Oficial"
+    }
+  }
+}

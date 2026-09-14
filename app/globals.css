@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta Contex SAS (Extraída del Logo) */
+  --contex-beige: #C0A87F;
+  --contex-green: #D1E616;
+  --contex-dark: #333235;
+  --contex-dark-hover: #1f1f1f;
+  
+  --background: var(--contex-dark);
+  --foreground: #f1f5f9;
+  
+  /* Tipografía */
+  --font-sans-family: var(--font-sans);
+  --font-heading: var(--font-display);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+}
+
+body {
+  background-color: var(--background);
+  /* Sutil gradiente radial fijo para añadir profundidad y evitar un fondo plano */
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 80%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans-family), Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Textura Jacquard Fotorealista */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/jacquard-texture.jpg');
+  background-size: 400px; /* Tamaño del patrón */
+  background-repeat: repeat;
+  opacity: 0.15; /* Ajusta este valor para más o menos intensidad (0.0 a 1.0) */
+  pointer-events: none;
+  z-index: -1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), sans-serif;
+}

@@ -1,0 +1,391 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modalOverlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.toolButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: all 0.3s ease;
+}
+
+.toolButton:hover {
+  background: var(--contex-green);
+  color: var(--contex-dark);
+  transform: scale(1.1);
+  border-color: var(--contex-green);
+}
+
+.bookContainer {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  max-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Estilos de las páginas del libro */
+.page {
+  background-color: #fdfbf7; /* Tono papel antiguo/crema */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+.pageContent {
+  padding: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.pageImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.cover {
+  background-color: var(--contex-dark);
+  background-image: radial-gradient(circle at top right, rgba(163, 204, 57, 0.15), transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.05), transparent 40%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem;
+  position: relative;
+}
+
+.coverTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--contex-green);
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.coverSubtitle {
+  font-size: 1.3rem;
+  color: #e2e8f0;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--contex-dark);
+  margin-bottom: 0.5rem;
+  z-index: 2;
+  position: relative;
+  line-height: 1.1;
+}
+
+.cursiveAccent {
+  font-family: var(--font-dancing), cursive;
+  font-size: 1.8rem;
+  color: var(--contex-green);
+  z-index: 2;
+  position: relative;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.pageText {
+  font-size: 1.05rem;
+  color: #334155;
+  line-height: 1.7;
+  z-index: 2;
+  position: relative;
+}
+
+.pageNumber {
+  position: absolute;
+  bottom: 1.2rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 600;
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.pageLeft .pageNumber {
+  left: 2rem;
+}
+
+.pageRight .pageNumber {
+  right: 2rem;
+}
+
+/* Efectos de sombra en el pliegue central */
+.pageLeft {
+  box-shadow: inset -20px 0 30px -10px rgba(0,0,0,0.15);
+}
+
+.pageRight {
+  box-shadow: inset 20px 0 30px -10px rgba(0,0,0,0.15);
+}
+
+/* ZOOM ESTILOS */
+.zoomButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-in;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+  color: var(--contex-dark);
+}
+
+.zoomButton:hover {
+  transform: scale(1.1);
+  background: var(--contex-green);
+}
+
+.zoomOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 20000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.zoomedImage {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .bookContainer {
+    padding: 0.5rem;
+  }
+  
+  .pageContent {
+    padding: 1.2rem 1rem;
+  }
+  
+  .pageTitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .cursiveAccent {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .pageText {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  
+  .closeButton {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .specsGrid {
+    gap: 0.4rem;
+    margin: 0.6rem 0;
+  }
+
+  .specCard {
+    padding: 0.5rem;
+  }
+
+  .specTitle {
+    font-size: 0.55rem;
+  }
+
+  .specValue {
+    font-size: 0.7rem;
+  }
+
+  .pageNumber {
+    font-size: 0.7rem;
+    bottom: 0.5rem;
+  }
+
+  .pageLeft .pageNumber {
+    left: 1rem;
+  }
+
+  .pageRight .pageNumber {
+    right: 1rem;
+  }
+}
+
+/* [NEW] Estilos para las tarjetas técnicas */
+.specsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.specCard {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.specCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--contex-green);
+}
+
+.specTitle {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #777;
+  font-weight: 700;
+}
+
+.specValue {
+  font-size: 0.85rem;
+  color: var(--contex-dark);
+  font-weight: 600;
+}
+
+/* Forzar modo horizontal en móviles */
+.forceLandscape {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .forceLandscape {
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}
+
+.swipeHintOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10050;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.swipeHintOverlay.hidden {
+  opacity: 0;
+}
+
+.swipeHand {
+  width: 80px;
+  height: 80px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5C12.88 5 14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.21 0-.69-.47-1.28-1.12-1.45z"/></svg>');
+  background-size: cover;
+  animation: swipeAnimation 2s infinite ease-in-out;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+}
+
+@keyframes swipeAnimation {
+  0% { transform: translateX(80px) rotate(15deg); opacity: 0; }
+  20% { transform: translateX(80px) rotate(15deg); opacity: 1; }
+  80% { transform: translateX(-80px) rotate(-15deg); opacity: 1; }
+  100% { transform: translateX(-80px) rotate(-15deg); opacity: 0; }
+}

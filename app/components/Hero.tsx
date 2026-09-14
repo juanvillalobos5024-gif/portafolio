@@ -1,0 +1,62 @@
+"use client";
+import { useState } from 'react';
+import Image from 'next/image';
+import FabricWaveDivider from './FabricWaveDivider';
+import styles from './Hero.module.css';
+import CatalogModal from './CatalogModal';
+import KidsCatalogModal from './KidsCatalogModal';
+
+export default function Hero({ data }: { data?: any }) {
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isKidsCatalogOpen, setIsKidsCatalogOpen] = useState(false);
+
+  return (
+    <section id="inicio" className={styles.heroContainer}>
+      {/* Imagen de fondo (Optimizada por Next.js) */}
+      <Image
+        src="/hero.contex.jpg"
+        alt="Proceso de fabricación textil Contex"
+        fill
+        className={styles.backgroundImage}
+        priority
+      />
+      
+      {/* Capa oscura para dar contraste al texto */}
+      <div className={styles.overlay}></div>
+      
+      {/* Contenido principal */}
+      <div className={styles.content}>
+        <div className={styles.heroLogoWrapper}>
+          <Image
+            src="/logo-contex.png"
+            alt="Logo CONTEX SAS"
+            width={600}
+            height={180}
+            className={styles.heroLogo}
+            priority
+          />
+        </div>
+        <div className={styles.subtitle}>
+          <p>{data?.title || "Innovación y excelencia textil."}</p>
+          {data?.subtitle ? (
+            <div dangerouslySetInnerHTML={{ __html: data.subtitle }} />
+          ) : (
+            <p>Descubre nuestros catálogos de alta calidad para la industria hotelera.</p>
+          )}
+        </div>
+        
+        <div className={styles.buttonContainer}>
+          <button onClick={() => setIsCatalogOpen(true)} className={styles.btnPrimary}>Catálogo Principal</button>
+          <button onClick={() => setIsKidsCatalogOpen(true)} className={styles.btnSecondary}>Catálogo Infantil</button>
+        </div>
+      </div>
+      
+      {/* Divisor suave estilo tela (Pliegues superpuestos) */}
+      {/* Divisor suave estilo tela (Pliegues superpuestos) */}
+      <FabricWaveDivider />
+
+      <CatalogModal isOpen={isCatalogOpen} onClose={() => setIsCatalogOpen(false)} />
+      <KidsCatalogModal isOpen={isKidsCatalogOpen} onClose={() => setIsKidsCatalogOpen(false)} />
+    </section>
+  );
+}
