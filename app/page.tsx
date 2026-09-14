@@ -6,16 +6,25 @@ import FeaturedPillars from "./components/FeaturedPillars";
 import ValueProposition from "./components/ValueProposition";
 import ContactSection from "./components/ContactSection";
 import GlobalThread from "./components/GlobalThread";
+import Redis from 'ioredis';
 
 export const dynamic = 'force-dynamic';
 
+const redis = new Redis(process.env.REDIS_URL || '');
+const REDIS_KEY = 'contex_portfolio_content';
+
 export default async function Home() {
-  // Leer contenido del CMS básico
-  const dataFilePath = path.join(process.cwd(), 'data', 'content.json');
   let content = null;
   try {
-    const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    content = JSON.parse(fileContents);
+    const redisData = await redis.get(REDIS_KEY);
+    if (redisData) {
+      content = JSON.parse(redisData);
+    } else {
+      // Fallback a archivo local si Redis está vacío (solo pasa la primera vez)
+      const dataFilePath = path.join(process.cwd(), 'data', 'content.json');
+      const fileContents = await fs.readFile(dataFilePath, 'utf8');
+      content = JSON.parse(fileContents);
+    }
   } catch (error) {
     console.error('Error reading content:', error);
   }
