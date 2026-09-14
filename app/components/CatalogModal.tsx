@@ -176,6 +176,14 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
 
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(0);
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [catalogData, setCatalogData] = useState<any>({});
@@ -432,18 +440,18 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
   return (
     <>
       <div className={`${styles.modalOverlay} ${isOpen ? styles.open : ''}`}>
-        <div style={{ position: 'absolute', top: '1.5rem', right: '2rem', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '40px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <div style={{ position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.15)', padding: '0.4rem 1rem', borderRadius: '40px', backdropFilter: 'blur(5px)', border: '1px solid rgba(255,255,255,0.05)' }}>
           <a 
             href="/catalogo.pdf" 
             download 
             className={styles.toolButton} 
             aria-label="Descargar PDF"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', width: '35px', height: '35px', fontSize: '1.2rem' }}
           >
             📄
           </a>
 
-          <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo">
+          <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
             ✕
           </button>
         </div>

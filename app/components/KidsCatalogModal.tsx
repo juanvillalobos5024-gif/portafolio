@@ -281,6 +281,13 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   if (!isOpen || !mounted) return null;
 
   const baseKidsLicensesData: Record<string, any> = {
@@ -435,18 +442,18 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               <div className={styles.swipeHand}></div>
             </div>
           )}
-        <div style={{ position: 'absolute', top: '1.5rem', right: '2rem', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '40px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <div style={{ position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.15)', padding: '0.4rem 1rem', borderRadius: '40px', backdropFilter: 'blur(5px)', border: '1px solid rgba(255,255,255,0.05)' }}>
           <a 
             href="/catalogo.pdf" 
             download 
             className={styles.toolButton} 
             aria-label="Descargar PDF"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', width: '35px', height: '35px', fontSize: '1.2rem' }}
           >
             📄
           </a>
 
-          <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo">
+          <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
             ✕
           </button>
         </div>
