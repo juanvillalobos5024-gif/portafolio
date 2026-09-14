@@ -685,6 +685,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                   </>
                 );
               })()}
+              </HTMLFlipBook>
           </>
           </div>
         </div>
