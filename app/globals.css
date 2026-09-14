@@ -23,6 +23,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
+  overflow-x: hidden;
 }
 
 body {
@@ -36,6 +37,7 @@ body {
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
+  overflow-x: hidden;
 }
 
 /* Textura Jacquard Fotorealista */

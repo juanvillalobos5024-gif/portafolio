@@ -177,7 +177,6 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [catalogData, setCatalogData] = useState<any>({});
   const [catalogSettings, setCatalogSettings] = useState<any>({});
@@ -433,15 +432,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
   return (
     <>
       <div className={`${styles.modalOverlay} ${isOpen ? styles.open : ''}`}>
-        <div className={styles.controlsBar}>
-          <button 
-            className={styles.toolButton} 
-            onClick={() => setIsSoundEnabled(!isSoundEnabled)} 
-            aria-label={isSoundEnabled ? "Silenciar sonido" : "Activar sonido"}
-          >
-            {isSoundEnabled ? '🔊' : '🔇'}
-          </button>
-          
+        <div style={{ position: 'absolute', top: '1.5rem', right: '2rem', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '40px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
           <a 
             href="/catalogo.pdf" 
             download 
@@ -521,9 +512,6 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 onFlip={(e: any) => {
                   setCurrentPage(e.data);
                   setShowSwipeHint(false);
-                  if (isSoundEnabled) {
-                    playPageTurnSound();
-                  }
                 }}
               >
               {/* PORTADA EDITORIAL */}

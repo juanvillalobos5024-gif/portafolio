@@ -74,9 +74,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${outfit.variable} ${inter.variable} ${playfair.variable} ${dancing.variable} ${fredoka.variable} antialiased`}>
-      <body suppressHydrationWarning className="flex flex-col font-sans bg-[var(--background)] text-[var(--foreground)]">
+      <body suppressHydrationWarning className="flex flex-col font-sans bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden w-full">
         <Navbar />
-        {children}
+        <main className="flex-grow w-full overflow-x-hidden max-w-[100%]">
+          {children}
+        </main>
         <WhatsAppButton />
         <FloatingShopButton />
       </body>

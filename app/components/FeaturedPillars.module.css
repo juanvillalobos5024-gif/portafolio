@@ -196,7 +196,7 @@
   }
   
   .cardsContainer {
-    height: 320px;
+    height: 420px;
   }
   
   .textContent {
@@ -208,5 +208,39 @@
 
   .tagsContainer, .controls {
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+    overflow-x: hidden;
+  }
+  
+  .mainTitle {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    text-align: center;
+  }
+  
+  .cardsContainer {
+    height: 360px;
+  }
+  
+  .card {
+    width: 290px;
+    height: 340px;
+    padding: 1.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .descriptionTitle {
+    font-size: 1.7rem;
+  }
+  
+  .descriptionText {
+    font-size: 1rem;
   }
 }

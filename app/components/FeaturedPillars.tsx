@@ -6,6 +6,17 @@ import styles from './FeaturedPillars.module.css';
 
 export default function FeaturedPillars({ data }: { data?: any[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detectar mobile solo en el cliente
+  import('react').then((React) => {
+    React.useEffect(() => {
+      const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+  });
 
   const pillarsData = data || [];
 
@@ -50,7 +61,7 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
               let rotateZ = 0;
 
               if (diff === 0) {
-                x = 100;
+                x = isMobile ? 0 : 100;
                 y = 0;
                 scale = 1;
                 zIndex = 10;
@@ -58,7 +69,7 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                 rotateY = 0;
                 rotateZ = 0;
               } else if (diff === 1) {
-                x = -20;
+                x = isMobile ? -15 : -20;
                 y = 20;
                 scale = 0.9;
                 zIndex = 9;
@@ -66,7 +77,7 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                 rotateY = 15;
                 rotateZ = -2;
               } else if (diff === 2) {
-                x = -120;
+                x = isMobile ? -50 : -120;
                 y = 40;
                 scale = 0.8;
                 zIndex = 8;
@@ -74,7 +85,7 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                 rotateY = 20;
                 rotateZ = -4;
               } else if (diff === pillarsData.length - 1) {
-                x = -220;
+                x = isMobile ? -80 : -220;
                 y = 60;
                 scale = 0.7;
                 zIndex = 7;
@@ -82,7 +93,7 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                 rotateY = 25;
                 rotateZ = -6;
               } else {
-                x = -220;
+                x = isMobile ? -80 : -220;
                 y = 60;
                 scale = 0.7;
                 zIndex = 6;
