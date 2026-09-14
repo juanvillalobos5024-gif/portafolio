@@ -3,11 +3,13 @@
     "title1": "Innovación y",
     "title2": "excelencia textil",
     "subtitle": "<p>Descubre&nbsp;nuestros&nbsp;catálogos&nbsp;de&nbsp;alta&nbsp;calidad&nbsp;para&nbsp;la&nbsp;industria&nbsp;hotelera&nbsp;e&nbsp;infantil.</p>",
-    "title": "CATALOGOS"
+    "title": "CATALOGOS",
+    "bgImage": "/uploads/1789405727436-fondo1.JPG"
   },
   "about": {
     "title": "Nuestra Historia",
-    "bodyHtml": "<p><strong>COMPAÑÍA&nbsp;NACIONAL&nbsp;DE&nbsp;TEXTILES</strong>&nbsp;ha&nbsp;forjado&nbsp;una&nbsp;destacada&nbsp;trayectoria&nbsp;en&nbsp;el&nbsp;sector,</p><p>consolidándose&nbsp;como&nbsp;referente&nbsp;gracias&nbsp;a&nbsp;su&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;calidad,&nbsp;innovación&nbsp;y&nbsp;sostenibilidad.&nbsp;</p><p>Desde&nbsp;sus&nbsp;inicios,&nbsp;ha&nbsp;tejido&nbsp;un&nbsp;camino&nbsp;de&nbsp;éxito,&nbsp;adaptándose&nbsp;a&nbsp;las&nbsp;tendencias&nbsp;del&nbsp;mercado&nbsp;y&nbsp;</p><p>destacando&nbsp;por&nbsp;su&nbsp;capacidad&nbsp;para&nbsp;ofrecer&nbsp;productos&nbsp;textiles&nbsp;como&nbsp;hamacas,&nbsp;toallas,&nbsp;</p><p>almohadas,&nbsp;sábanas,&nbsp;edredones,&nbsp;para&nbsp;el&nbsp;hogar&nbsp;y&nbsp;el&nbsp;sector&nbsp;hotelero.</p><p></p><p>Somos&nbsp;una&nbsp;empresa&nbsp;en&nbsp;constante&nbsp;avance&nbsp;y,&nbsp;nuestro&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;<em>sostenibilidad</em>&nbsp;se&nbsp;refleja</p><p>en&nbsp;la&nbsp;producción&nbsp;de&nbsp;Hilo&nbsp;reciclado&nbsp;para&nbsp;la&nbsp;elaboración&nbsp;de&nbsp;los&nbsp;productos&nbsp;textiles,&nbsp;abriendo&nbsp;paso&nbsp;hacia&nbsp;</p><p>una&nbsp;industria&nbsp;más&nbsp;responsable,&nbsp;marcando&nbsp;así&nbsp;el&nbsp;rumbo&nbsp;hacia&nbsp;un&nbsp;futuro&nbsp;textil&nbsp;más&nbsp;ecoamigable.</p><ul><li>Calidad&nbsp;garantizada</li><li>Sostenibilidad</li><li>Innovación&nbsp;textil</li></ul>"
+    "bodyHtml": "<p><strong>COMPAÑÍA&nbsp;NACIONAL&nbsp;DE&nbsp;TEXTILES</strong>&nbsp;ha&nbsp;forjado&nbsp;una&nbsp;destacada&nbsp;trayectoria&nbsp;en&nbsp;el&nbsp;sector,</p><p>consolidándose&nbsp;como&nbsp;referente&nbsp;gracias&nbsp;a&nbsp;su&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;calidad,&nbsp;innovación&nbsp;y&nbsp;sostenibilidad.&nbsp;</p><p>Desde&nbsp;sus&nbsp;inicios,&nbsp;ha&nbsp;tejido&nbsp;un&nbsp;camino&nbsp;de&nbsp;éxito,&nbsp;adaptándose&nbsp;a&nbsp;las&nbsp;tendencias&nbsp;del&nbsp;mercado&nbsp;y&nbsp;</p><p>destacando&nbsp;por&nbsp;su&nbsp;capacidad&nbsp;para&nbsp;ofrecer&nbsp;productos&nbsp;textiles&nbsp;como&nbsp;hamacas,&nbsp;toallas,&nbsp;</p><p>almohadas,&nbsp;sábanas,&nbsp;edredones,&nbsp;para&nbsp;el&nbsp;hogar&nbsp;y&nbsp;el&nbsp;sector&nbsp;hotelero.</p><p></p><p>Somos&nbsp;una&nbsp;empresa&nbsp;en&nbsp;constante&nbsp;avance&nbsp;y,&nbsp;nuestro&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;<em>sostenibilidad</em>&nbsp;se&nbsp;refleja</p><p>en&nbsp;la&nbsp;producción&nbsp;de&nbsp;Hilo&nbsp;reciclado&nbsp;para&nbsp;la&nbsp;elaboración&nbsp;de&nbsp;los&nbsp;productos&nbsp;textiles,&nbsp;abriendo&nbsp;paso&nbsp;hacia&nbsp;</p><p>una&nbsp;industria&nbsp;más&nbsp;responsable,&nbsp;marcando&nbsp;así&nbsp;el&nbsp;rumbo&nbsp;hacia&nbsp;un&nbsp;futuro&nbsp;textil&nbsp;más&nbsp;ecoamigable.</p><ul><li>Calidad&nbsp;garantizada</li><li>Sostenibilidad</li><li>Innovación&nbsp;textil</li></ul>",
+    "image": ""
   },
   "valueProposition": {
     "title": "¿Por qué elegir Contex?",
@@ -18,7 +20,29 @@
     "card3Title": "Atención Hotelera",
     "card3Desc": "Líneas especializadas de dotación con los más altos estándares para el sector turismo y hospitalidad.",
     "card4Title": "Distribución Nacional",
-    "card4Desc": "Llegamos a cada rincón del país con logística eficiente y tiempos de entrega garantizados."
+    "card4Desc": "Llegamos a cada rincón del país con logística eficiente y tiempos de entrega garantizados.",
+    "cards": [
+      {
+        "id": "1",
+        "title": "Calidad de Hilos",
+        "desc": "Seleccionamos minuciosamente nuestras materias primas para garantizar acabados suaves y resistentes."
+      },
+      {
+        "id": "2",
+        "title": "Alta Durabilidad",
+        "desc": "Nuestros textiles están diseñados para soportar lavados industriales continuos sin perder su forma ni color."
+      },
+      {
+        "id": "3",
+        "title": "Atención Hotelera",
+        "desc": "Líneas especializadas de dotación con los más altos estándares para el sector turismo y hospitalidad."
+      },
+      {
+        "id": "4",
+        "title": "Distribución Nacional",
+        "desc": "Llegamos a cada rincón del país con logística eficiente y tiempos de entrega garantizados."
+      }
+    ]
   },
   "contact": {
     "title": "Contáctanos",
@@ -51,11 +75,12 @@
         },
         {
           "id": "860d7b6a-b15d-4b06-baee-91c84b515ad4",
-          "name": "",
-          "hex": "#cccccc",
-          "image": ""
+          "name": "oro rojo",
+          "hex": "#d52020",
+          "image": "/uploads/1789407300587-fondo2.JPG"
         }
-      ]
+      ],
+      "mainColorHex": "#2e3947"
     },
     "royal": {
       "title": "Colección Royal",
@@ -226,5 +251,74 @@
       "dimensions": "60 x 120 cm",
       "quality": "Licencia Oficial"
     }
-  }
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "mainCatalogSettings": {
+    "indexHtml": "<p>Colecion&nbsp;Royal</p>",
+    "coverImage": "/uploads/1789406005483-fondo2.JPG",
+    "historyHtml": "<p></p>",
+    "backCoverImage": "/uploads/1789407056354-fondo1.JPG"
+  },
+  "featuredPillars": [
+    {
+      "id": "pillar-1",
+      "shortTitle": "Línea Hogar",
+      "subtitle": "01",
+      "title": "Experiencia para el descanso",
+      "description": "Diseñamos textiles para el hogar que combinan suavidad, resistencia y las últimas tendencias. Ideales para sábanas, cubrecamas y decoración de espacios interiores.",
+      "tags": [
+        "100% Algodón",
+        "Microfibra",
+        "Polialgodón"
+      ],
+      "color": "#C0A87F",
+      "number": "01"
+    },
+    {
+      "id": "pillar-2",
+      "shortTitle": "Institucional",
+      "subtitle": "02",
+      "title": "Alto rendimiento hotelero",
+      "description": "Textiles desarrollados específicamente para soportar el lavado industrial continuo sin perder su tacto ni apariencia original. Garantía de durabilidad y blancura.",
+      "tags": [
+        "Blancura duradera",
+        "Resistencia",
+        "Antipeeling"
+      ],
+      "color": "#D1E616",
+      "number": "02"
+    },
+    {
+      "id": "pillar-3",
+      "shortTitle": "Telary Kids",
+      "subtitle": "03",
+      "title": "Cuidado para los pequeños",
+      "description": "Colecciones infantiles llenas de color y personajes mágicos, fabricadas con materiales hipoalergénicos diseñados para proteger la delicada piel infantil.",
+      "tags": [
+        "Hipoalergénico",
+        "Estampados",
+        "Suavidad extrema"
+      ],
+      "color": "#333235",
+      "number": "03"
+    },
+    {
+      "id": "pillar-4",
+      "shortTitle": "Innovación",
+      "subtitle": "04",
+      "title": "Procesos de última generación",
+      "description": "Implementamos procesos de tejeduría y acabado modernos que garantizan resultados perfectos y la optimización de recursos, apostando por la sostenibilidad.",
+      "tags": [
+        "Tecnología",
+        "Sostenibilidad",
+        "Calidad"
+      ],
+      "color": "#1f1f1f",
+      "number": "04"
+    }
+  ]
 }

@@ -3,6 +3,8 @@ import { Outfit, Inter, Playfair_Display, Dancing_Script, Fredoka } from "next/f
 import Navbar from "./components/Navbar";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingShopButton from "./components/FloatingShopButton";
+import fs from 'fs';
+import path from 'path';
 import "./globals.css";
 
 const outfit = Outfit({
@@ -35,11 +37,35 @@ const fredoka = Fredoka({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "CONTEX SAS | Textiles en Barranquilla y Dotación Hotelera en Colombia",
-  description: "Fábrica nacional de textiles con años de experiencia. Alta calidad en hilos, telas industriales, ropa de cama y lencería para hoteles en toda Colombia.",
-  keywords: "textiles en Barranquilla, dotación hotelera en Colombia, telas industriales, fábrica de textiles, Contex SAS, sábanas para hoteles",
-};
+// Generación Dinámica de Metadatos (SEO) desde el Admin
+export async function generateMetadata(): Promise<Metadata> {
+  let seo = {
+    title: "CONTEX SAS | Textiles en Barranquilla y Dotación Hotelera en Colombia",
+    description: "Fábrica nacional de textiles con años de experiencia. Alta calidad en hilos, telas industriales, ropa de cama y lencería para hoteles en toda Colombia.",
+    keywords: "textiles en Barranquilla, dotación hotelera en Colombia, telas industriales, fábrica de textiles, Contex SAS, sábanas para hoteles"
+  };
+
+  try {
+    const filePath = path.join(process.cwd(), 'data/content.json');
+    if (fs.existsSync(filePath)) {
+      const fileData = fs.readFileSync(filePath, 'utf8');
+      const data = JSON.parse(fileData);
+      if (data.seo) {
+        if (data.seo.title) seo.title = data.seo.title;
+        if (data.seo.description) seo.description = data.seo.description;
+        if (data.seo.keywords) seo.keywords = data.seo.keywords;
+      }
+    }
+  } catch (error) {
+    console.error("Error reading SEO metadata", error);
+  }
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+  };
+}
 
 export default function RootLayout({
   children,

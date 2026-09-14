@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import Hero from "./components/Hero";
 import AboutUs from "./components/AboutUs";
+import FeaturedPillars from "./components/FeaturedPillars";
 import ValueProposition from "./components/ValueProposition";
 import ContactSection from "./components/ContactSection";
 import GlobalThread from "./components/GlobalThread";
@@ -29,6 +30,9 @@ export default async function Home() {
       
       {/* 2. Quiénes Somos */}
       <AboutUs data={content?.about} />
+      
+      {/* 2.5 Líneas de Excelencia / Pilares */}
+      <FeaturedPillars data={content?.featuredPillars} />
       
       {/* 3. Propuesta de Valor */}
       <ValueProposition data={content?.valueProposition} />

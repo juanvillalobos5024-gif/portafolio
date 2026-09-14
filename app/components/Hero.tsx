@@ -14,8 +14,8 @@ export default function Hero({ data }: { data?: any }) {
     <section id="inicio" className={styles.heroContainer}>
       {/* Imagen de fondo (Optimizada por Next.js) */}
       <Image
-        src="/hero.contex.jpg"
-        alt="Proceso de fabricación textil Contex"
+        src={data?.bgImage || "/hero.contex.jpg"}
+        alt={data?.alt || "Proceso de fabricación textil Contex"}
         fill
         className={styles.backgroundImage}
         priority

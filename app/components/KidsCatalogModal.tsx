@@ -229,13 +229,21 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [catalogData, setCatalogData] = useState<any>({});
+  const [catalogSettings, setCatalogSettings] = useState<any>({});
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     fetch('/api/content')
       .then(res => res.json())
       .then(data => {
-        if (data.kidsCatalog) setCatalogData(data.kidsCatalog);
+        if (data.kidsCatalog) {
+          setCatalogData(data.kidsCatalog);
+        }
+        if (data.kidsCatalogSettings) {
+          setCatalogSettings(data.kidsCatalogSettings);
+        }
+        setDataLoaded(true);
       })
       .catch(console.error);
 
@@ -411,7 +419,9 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
     }
   });
 
-  const totalPages = 4 + (Object.keys(kidsLicensesData).length * 2);
+  const hasIndex = !!catalogSettings?.indexHtml;
+  const indexOffset = hasIndex ? 2 : 0;
+  const totalPages = 4 + indexOffset + (Object.keys(kidsLicensesData).length * 2);
 
   return (
     <>
@@ -514,43 +524,27 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               >
               {/* PÁGINA 1 - PORTADA */}
               <Page number={1} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: 'url(/catalogo/portada_kids.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.7)' }}></div>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.8))', zIndex: 1 }}></div>
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', padding: '3rem 2.5rem' }}>
-                  <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                    <img src="/Logonuevo2.svg" alt="Telary" style={{ width: '220px', margin: '0 auto 0 auto', display: 'block', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '-20px', marginBottom: '1.5rem', fontFamily: 'var(--font-fredoka), "Arial Rounded MT Bold", sans-serif', fontSize: '4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)', userSelect: 'none' }}>
-                      <span style={{ color: '#FF5E5B', transform: 'rotate(-4deg) translateY(2px)', zIndex: 4 }}>K</span>
-                      <span style={{ color: '#00D4A1', position: 'relative', transform: 'rotate(2deg) translateY(-2px)', zIndex: 3, marginLeft: '2px' }}>
-                        I
-                        <span style={{ position: 'absolute', top: '-16px', left: '50%', transform: 'translateX(-50%) rotate(-5deg)', color: '#FFC83D', fontSize: '2.2rem', textShadow: 'none' }}>★</span>
-                      </span>
-                      <span style={{ color: '#AF7AFF', transform: 'rotate(-2deg) translateY(3px)', zIndex: 2, marginLeft: '4px' }}>D</span>
-                      <span style={{ color: '#FFC83D', transform: 'rotate(3deg) translateY(-1px)', zIndex: 1, marginLeft: '2px' }}>S</span>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                    {/* Nickelodeon Logo */}
-                    <div style={{ fontFamily: 'var(--font-fredoka), sans-serif', color: '#FF7F00', fontSize: '1.3rem', fontWeight: 700, textTransform: 'lowercase', letterSpacing: '-0.5px', textShadow: '0 2px 4px rgba(0,0,0,0.6)' }}>
-                      nickelodeon
-                    </div>
-
-                    {/* Disney Logo */}
-                    <div style={{ fontFamily: 'var(--font-dancing), cursive', color: '#fff', fontSize: '2rem', fontWeight: 700, textShadow: '0 2px 4px rgba(0,0,0,0.6)', transform: 'translateY(-2px)' }}>
-                      Disney
-                    </div>
-
-                    {/* Marvel Logo */}
-                    <div style={{ backgroundColor: '#E23636', color: '#fff', fontFamily: 'Impact, "Arial Narrow", sans-serif', fontSize: '1.4rem', fontWeight: 900, textTransform: 'uppercase', padding: '0.1rem 0.4rem', letterSpacing: '-1px', boxShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-                      MARVEL
-                    </div>
-                  </div>
-                </div>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.coverImage || '/catalogo/portada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.7)' }}></div>
               </Page>
+
+              {hasIndex && (
+                <>
+                  <Page number={2} isLeft={true}>
+                    <PageBackground side="left" variant="kids" />
+                  </Page>
+                  <Page number={3} isRight={true}>
+                    <PageBackground side="right" variant="kids" />
+                    <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
+                      <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>Índice</h2>
+                      <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
+                    </div>
+                  </Page>
+                </>
+              )}
 
               {/* PÁGINAS DE PERSONAJES */}
               {Object.entries(kidsLicensesData).flatMap(([key, data], index) => {
-                const pageIndexOffset = 2 + (index * 2);
+                const pageIndexOffset = 2 + indexOffset + (index * 2);
                 const currentViewOptions = Object.keys(data.views);
                 const activeView = characterViews[key] || currentViewOptions[0];
                 const imageSrc = data.views[activeView];
@@ -607,26 +601,15 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               })}
 
               {/* PÁGINA FINAL - CONTRAPORTADA */}
-              <Page number={2 + (Object.keys(kidsLicensesData).length * 2)} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: 'url(/catalogo/portada_kids.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.3)' }}></div>
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '2.5rem 1.5rem', color: '#fff' }}>
-                  <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '2rem' }}>
-                    <img src="/Logonuevo2.svg" alt="Telary" style={{ width: '160px', margin: '0 auto 0.8rem auto', display: 'block', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
-                    <p style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase', color: '#aaa', marginTop: '0.8rem' }}>Línea Infantil</p>
-                  </div>
-                  <div style={{ textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '2.5rem 1.5rem', width: '100%', maxWidth: '300px', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
-                    <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', margin: '0 0 1rem 0', color: '#fff' }}>¿Listo para cotizar?</h2>
-                    <p style={{ fontSize: '0.85rem', color: '#ccc', marginBottom: '2rem', lineHeight: 1.5 }}>Habla con un asesor y lleva la magia a tus espacios.</p>
-                    <a href="#" style={{ display: 'inline-block', backgroundColor: 'var(--contex-green)', color: '#000', padding: '0.8rem 1.5rem', borderRadius: '4px', textDecoration: 'none', fontWeight: 800, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', transition: 'all 0.3s', boxShadow: '0 4px 15px rgba(212, 233, 12, 0.2)' }}>Contactar Ahora</a>
-                  </div>
-                </div>
+              <Page number={2 + indexOffset + (Object.keys(kidsLicensesData).length * 2)} isCover={true}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.backCoverImage || '/catalogo/portada_kids.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'brightness(0.3)' }}></div>
               </Page>
 
             </HTMLFlipBook>
 
               {/* Stacked pages - left side (pages already read) */}
               {(() => {
-                const totalPages = 2 + (Object.keys(kidsLicensesData).length * 2);
+                const currentTotalPages = 2 + indexOffset + (Object.keys(kidsLicensesData).length * 2);
                 return (
                   <>
                     {currentPage > 0 && (
@@ -660,7 +643,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                       </div>
                     )}
 
-                    {currentPage < totalPages - 2 && (
+                    {currentPage < currentTotalPages - 2 && (
                       <div style={{
                         position: 'absolute',
                         right: 0,
@@ -678,7 +661,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                         transform: 'translateX(95%)'
                       }}>
                         {/* Líneas simulando hojas */}
-                        {Array.from({ length: Math.min((totalPages - currentPage), 8) }).map((_, i) => (
+                        {Array.from({ length: Math.min((currentTotalPages - currentPage), 8) }).map((_, i) => (
                           <div key={`right-${i}`} style={{
                             position: 'absolute',
                             left: `${i * 2.5}px`,

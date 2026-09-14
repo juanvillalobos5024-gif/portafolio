@@ -180,6 +180,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [catalogData, setCatalogData] = useState<any>({});
+  const [catalogSettings, setCatalogSettings] = useState<any>({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedColors, setSelectedColors] = useState<Record<string, string>>({
     romana: 'general', royal: 'general', toscana: 'general', home: 'general',
@@ -333,6 +334,9 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
       .then(data => {
         if (data.mainCatalog) {
           setCatalogData(data.mainCatalog);
+        }
+        if (data.mainCatalogSettings) {
+          setCatalogSettings(data.mainCatalogSettings);
         }
         setDataLoaded(true);
       })
@@ -524,50 +528,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               >
               {/* PORTADA EDITORIAL */}
               <Page number={1} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: 'url(/catalogo/portada_editorial.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }}></div>
-
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', height: '100%', padding: '2.5rem 1.5rem', color: '#fff', textShadow: '0 2px 10px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.3)' }}>
-                  
-                  {/* Número de Edición */}
-                  <div style={{ position: 'absolute', top: '2.5rem', right: '1.5rem', fontSize: '1.1rem', fontWeight: 600, letterSpacing: '1px' }}>
-                    Nº 26
-                  </div>
-
-                  {/* Título Principal */}
-                  <div style={{ marginTop: '0.5rem' }}>
-                    <img src="/Logonuevo2.svg" alt="Telary" style={{ width: '220px', display: 'block', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.4))' }} />
-                  </div>
-
-                  {/* Textos laterales asimétricos */}
-                  <div style={{ marginTop: 'auto', marginBottom: '4rem', display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-                    <div style={{ width: '65%' }}>
-                      <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', margin: '0 0 0.5rem 0', lineHeight: 1.1, color: '#fff' }}>
-                        Colección<br/>2026
-                      </h2>
-                      <p style={{ fontSize: '0.75rem', fontWeight: 700, lineHeight: 1.5, color: '#f0f0f0', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                        Nos adelantamos a lo que serán las tendencias de suavidad en tu hogar para el 2026.
-                      </p>
-                    </div>
-
-                    <div style={{ width: '70%', alignSelf: 'flex-end', textAlign: 'right' }}>
-                      <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', margin: '0 0 0.5rem 0', lineHeight: 1.1, color: '#fff' }}>
-                        Fibras de<br/>Algodón
-                      </h2>
-                      <p style={{ fontSize: '0.75rem', fontWeight: 700, lineHeight: 1.5, color: '#f0f0f0', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                        El material orgánico que dominará la temporada de interiores.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Código de barras y CTA */}
-                  <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: 'auto' }}>
-                    <div className={styles.barcode} style={{ filter: 'invert(1) drop-shadow(0 2px 5px rgba(0,0,0,0.5))' }}></div>
-                    <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#fff', margin: 0 }}>
-                      HAZ CLIC PARA ABRIR ▶
-                    </p>
-                  </div>
-
-                </div>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.coverImage || '/catalogo/portada_editorial.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }}></div>
               </Page>
 
               {/* === INTRODUCCIÓN === */}
@@ -577,23 +538,27 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '2rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', lineHeight: 1.1 }}>
                     Nuestra<br/>Historia
                   </h2>
-                  <div style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#4a5568', textAlign: 'justify', flex: 1 }}>
-                    <p style={{ marginBottom: '1rem' }}>
-                      <strong>COMPAÑÍA NACIONAL DE TEXTILES</strong> ha forjado una destacada trayectoria en el sector, consolidándose como referente gracias a su compromiso con la calidad, innovación y sostenibilidad.
-                    </p>
-                    <p style={{ marginBottom: '1rem' }}>
-                      Desde sus inicios, ha tejido un camino de éxito, adaptándose a las tendencias del mercado y destacando por su capacidad para ofrecer productos textiles como hamacas, toallas, almohadas, sábanas, edredones, para el hogar y el sector hotelero.
-                    </p>
-                    <p style={{ marginBottom: '1.5rem' }}>
-                      Somos una empresa en constante avance y, nuestro compromiso con la sostenibilidad se refleja en la producción de hilo reciclado para la elaboración de los productos textiles, abriendo paso hacia una industria más responsable, marcando así el rumbo hacia un futuro textil más ecoamigable.
-                    </p>
-                    
-                    <div style={{ padding: '1.5rem', backgroundColor: 'rgba(212, 233, 12, 0.1)', borderLeft: '4px solid var(--contex-green)', borderRadius: '0 8px 8px 0', marginTop: '2rem' }}>
-                      <p style={{ fontSize: '1.1rem', fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: 'var(--contex-dark)', margin: 0, textAlign: 'center' }}>
-                        "Convertimos fibras textiles en productos que le dan vida a tus sueños."
+                  {catalogSettings?.historyHtml ? (
+                    <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568', flex: 1 }} dangerouslySetInnerHTML={{ __html: catalogSettings.historyHtml }} />
+                  ) : (
+                    <div style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#4a5568', textAlign: 'justify', flex: 1 }}>
+                      <p style={{ marginBottom: '1rem' }}>
+                        <strong>COMPAÑÍA NACIONAL DE TEXTILES</strong> ha forjado una destacada trayectoria en el sector, consolidándose como referente gracias a su compromiso con la calidad, innovación y sostenibilidad.
                       </p>
+                      <p style={{ marginBottom: '1rem' }}>
+                        Desde sus inicios, ha tejido un camino de éxito, adaptándose a las tendencias del mercado y destacando por su capacidad para ofrecer productos textiles como hamacas, toallas, almohadas, sábanas, edredones, para el hogar y el sector hotelero.
+                      </p>
+                      <p style={{ marginBottom: '1.5rem' }}>
+                        Somos una empresa en constante avance y, nuestro compromiso con la sostenibilidad se refleja en la producción de hilo reciclado para la elaboración de los productos textiles, abriendo paso hacia una industria más responsable, marcando así el rumbo hacia un futuro textil más ecoamigable.
+                      </p>
+                      
+                      <div style={{ padding: '1.5rem', backgroundColor: 'rgba(212, 233, 12, 0.1)', borderLeft: '4px solid var(--contex-green)', borderRadius: '0 8px 8px 0', marginTop: '2rem' }}>
+                        <p style={{ fontSize: '1.1rem', fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: 'var(--contex-dark)', margin: 0, textAlign: 'center' }}>
+                          "Convertimos fibras textiles en productos que le dan vida a tus sueños."
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </Page>
 
@@ -605,35 +570,39 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                     Índice
                   </h2>
                   
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.2rem', fontSize: '0.75rem' }}>
-                    <div>
-                      <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Toallas</h3>
-                      <p style={{ color: '#666', lineHeight: 1.6 }}>
-                        Valencia • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(16)}>Zafiro</span> • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(14)}>Tropical</span> • Fuzzy* • Atenas • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(8)}>Toscana</span> • Doble Rizo • Tapete Clasic • Primax* • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana*</span> • Lisboa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana</span> • Nativa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(10)}>Home</span> • Oasis • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(6)}>Royal</span>-Candy* • Tapete Pies • Bata Ziggy
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Cocina</h3>
-                      <p style={{ color: '#666', lineHeight: 1.6 }}>
-                        Limpiones Microfibra • Limpiones Estampados
-                      </p>
-                    </div>
+                  {catalogSettings?.indexHtml ? (
+                    <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
+                  ) : (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.2rem', fontSize: '0.75rem' }}>
+                      <div>
+                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Toallas</h3>
+                        <p style={{ color: '#666', lineHeight: 1.6 }}>
+                          Valencia • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(16)}>Zafiro</span> • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(14)}>Tropical</span> • Fuzzy* • Atenas • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(8)}>Toscana</span> • Doble Rizo • Tapete Clasic • Primax* • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana*</span> • Lisboa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana</span> • Nativa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(10)}>Home</span> • Oasis • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(6)}>Royal</span>-Candy* • Tapete Pies • Bata Ziggy
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Cocina</h3>
+                        <p style={{ color: '#666', lineHeight: 1.6 }}>
+                          Limpiones Microfibra • Limpiones Estampados
+                        </p>
+                      </div>
 
-                    <div>
-                      <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Hamacas</h3>
-                      <p style={{ color: '#666', lineHeight: 1.6 }}>
-                        Típica a Color • Típica Negra • Metalissa • Bordada • Extra Bordada • Familiar a Rayas
-                      </p>
-                    </div>
+                      <div>
+                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Hamacas</h3>
+                        <p style={{ color: '#666', lineHeight: 1.6 }}>
+                          Típica a Color • Típica Negra • Metalissa • Bordada • Extra Bordada • Familiar a Rayas
+                        </p>
+                      </div>
 
-                    <div>
-                      <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Lencería</h3>
-                      <p style={{ color: '#666', lineHeight: 1.6 }}>
-                        Sobrecama Andrea • Sobrecama Domino • Juego de Sábanas Estampado • Almohada Spectra • Almohada Memor
-                      </p>
+                      <div>
+                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Lencería</h3>
+                        <p style={{ color: '#666', lineHeight: 1.6 }}>
+                          Sobrecama Andrea • Sobrecama Domino • Juego de Sábanas Estampado • Almohada Spectra • Almohada Memor
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </Page>
 
@@ -928,59 +897,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
 
               {/* CONTRAPORTADA */}
               <Page number={totalPages} isCover={true}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: 'url(/catalogo/portada_editorial.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'grayscale(50%) brightness(0.2)' }}></div>
-                
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '2.5rem 1.5rem', color: '#fff' }}>
-                  
-                  <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '2rem' }}>
-                    <img src="/Logonuevo2.svg" alt="Telary" style={{ width: '180px', margin: '0 auto', display: 'block', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.4))' }} />
-                    <p style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase', color: '#aaa', marginTop: '0.8rem' }}>
-                      Colección 2026
-                    </p>
-                  </div>
-
-                  <div style={{
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '16px',
-                    padding: '2rem',
-                    width: '90%',
-                    maxWidth: '340px',
-                    textAlign: 'center',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
-                  }}>
-                    <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.4rem', color: '#fff', margin: '0 0 0.5rem 0' }}>
-                      Contex SAS
-                    </h3>
-                    <p style={{ color: 'var(--contex-green)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-                      Línea Institucional & Hogar
-                    </p>
-                    
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.8rem', color: '#ccc', textAlign: 'left', marginBottom: '1.5rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                        <span style={{ color: 'var(--contex-green)' }}>📍</span>
-                        <span>Medellín, Colombia</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                        <span style={{ color: 'var(--contex-green)' }}>✉️</span>
-                        <span>contacto@contex.com.co</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                        <span style={{ color: 'var(--contex-green)' }}>🌐</span>
-                        <span>www.contex.com.co</span>
-                      </div>
-                    </div>
-
-                    <div style={{ marginTop: '1.5rem', width: '100%' }}>
-                      <WhatsAppButton inline={true} collection="General" />
-                    </div>
-                  </div>
-
-                  <p style={{ position: 'absolute', bottom: '1.5rem', fontSize: '0.65rem', color: '#666', letterSpacing: '1px' }}>
-                    © {new Date().getFullYear()} CONTEX S.A.S. Todos los derechos reservados.
-                  </p>
-                </div>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.backCoverImage || '/catalogo/portada_editorial.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0, filter: 'grayscale(50%) brightness(0.2)' }}></div>
               </Page>
 
               </HTMLFlipBook>
