@@ -437,26 +437,22 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
         <div className={styles.forceLandscape} onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}>
-          {isMobile && (
-            <div className={`${styles.swipeHintOverlay} ${!showSwipeHint ? styles.hidden : ''}`}>
-              <div className={styles.swipeHand}></div>
-            </div>
-          )}
-        <div style={{ position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.15)', padding: '0.4rem 1rem', borderRadius: '40px', backdropFilter: 'blur(5px)', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <a 
-            href="/catalogo.pdf" 
-            download 
-            className={styles.toolButton} 
-            aria-label="Descargar PDF"
-            style={{ textDecoration: 'none', width: '35px', height: '35px', fontSize: '1.2rem' }}
-          >
-            📄
-          </a>
+          <div style={{ position: 'absolute', top: '1rem', right: '1rem', display: 'flex', gap: '0.8rem', zIndex: 10000, background: 'rgba(0,0,0,0.15)', padding: '0.4rem 1rem', borderRadius: '40px', backdropFilter: 'blur(5px)', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <a 
+              href="/catalogo.pdf" 
+              download 
+              className={styles.toolButton} 
+              aria-label="Descargar PDF"
+              style={{ textDecoration: 'none', width: '35px', height: '35px', fontSize: '1.2rem' }}
+            >
+              📄
+            </a>
 
-          <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
-            ✕
-          </button>
-        </div>
+            <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
+              ✕
+            </button>
+          </div>
+          {isMobile && (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
           <div 
             className={styles.bookContainer}
@@ -499,12 +495,12 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               {/* @ts-ignore */}
               <HTMLFlipBook 
                 ref={bookRef}
-                width={450} 
-                height={600} 
+                width={isMobile ? 270 : 450} 
+                height={isMobile ? 370 : 600} 
                 size="stretch"
-                minWidth={315}
+                minWidth={250}
                 maxWidth={600}
-                minHeight={420}
+                minHeight={350}
                 maxHeight={800}
                 maxShadowOpacity={0.5}
                 showCover={true}
