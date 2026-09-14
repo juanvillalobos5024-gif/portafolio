@@ -279,20 +279,6 @@
       "number": "01"
     },
     {
-      "id": "pillar-2",
-      "shortTitle": "Institucional",
-      "subtitle": "02",
-      "title": "Alto rendimiento hotelero",
-      "description": "Textiles desarrollados específicamente para soportar el lavado industrial continuo sin perder su tacto ni apariencia original. Garantía de durabilidad y blancura.",
-      "tags": [
-        "Blancura duradera",
-        "Resistencia",
-        "Antipeeling"
-      ],
-      "color": "#D1E616",
-      "number": "02"
-    },
-    {
       "id": "pillar-3",
       "shortTitle": "Telary Kids",
       "subtitle": "03",
@@ -308,7 +294,7 @@
     },
     {
       "id": "pillar-4",
-      "shortTitle": "Innovación",
+      "shortTitle": "Linea Hotelera",
       "subtitle": "04",
       "title": "Procesos de última generación",
       "description": "Implementamos procesos de tejeduría y acabado modernos que garantizan resultados perfectos y la optimización de recursos, apostando por la sostenibilidad.",
@@ -317,7 +303,7 @@
         "Sostenibilidad",
         "Calidad"
       ],
-      "color": "#1f1f1f",
+      "color": "#a0ff52",
       "number": "04"
     }
   ]

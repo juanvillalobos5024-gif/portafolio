@@ -368,9 +368,8 @@ export default function AdminDashboard() {
   };
 
   const handleAddCollection = (catalogKey: 'mainCatalog' | 'kidsCatalog') => {
-    const name = prompt('Ingresa el ID de colección (sin espacios, minúsculas):');
-    if (!name) return;
-    if (content[catalogKey][name]) return alert('Ya existe.');
+    const name = `collection_${Math.random().toString(36).substring(2, 9)}`;
+    if (content[catalogKey][name]) return alert('Ya existe un error de colisión, intenta de nuevo.');
     
     const newContent = { ...content };
     newContent[catalogKey][name] = { title: 'Nueva Colección', features: [] };
