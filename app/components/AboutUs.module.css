@@ -106,6 +106,7 @@
 .richText * {
   max-width: 100% !important;
   white-space: normal !important;
+  text-align: left !important;
   box-sizing: border-box !important;
 }
 
