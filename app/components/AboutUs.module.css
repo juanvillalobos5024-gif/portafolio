@@ -101,6 +101,8 @@
   max-width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .richText * {
@@ -108,6 +110,8 @@
   white-space: normal !important;
   text-align: left !important;
   box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
 }
 
 .richText p {

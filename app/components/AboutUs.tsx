@@ -10,7 +10,7 @@ export default function AboutUs({ data }: { data?: any }) {
           {data?.bodyHtml ? (
             <div 
               className={styles.richText} 
-              dangerouslySetInnerHTML={{ __html: data.bodyHtml }} 
+              dangerouslySetInnerHTML={{ __html: typeof data.bodyHtml === 'string' ? data.bodyHtml.replace(/&nbsp;/g, ' ') : data.bodyHtml }} 
             />
           ) : (
             <></>
