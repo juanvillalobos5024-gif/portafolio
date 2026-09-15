@@ -30,6 +30,7 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -106,7 +107,7 @@
   max-width: 100% !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
-  white-space: pre-wrap !important;
+  white-space: normal !important;
   text-align: justify !important;
   box-sizing: border-box !important;
 }
