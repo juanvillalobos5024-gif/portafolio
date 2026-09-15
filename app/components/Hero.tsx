@@ -5,6 +5,7 @@ import FabricWaveDivider from './FabricWaveDivider';
 import styles from './Hero.module.css';
 import CatalogModal from './CatalogModal';
 import KidsCatalogModal from './KidsCatalogModal';
+import ContactTicker from './ContactTicker';
 
 export default function Hero({ data }: { data?: any }) {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
@@ -49,6 +50,8 @@ export default function Hero({ data }: { data?: any }) {
           <button onClick={() => setIsCatalogOpen(true)} className={styles.btnPrimary}>Catálogo Principal</button>
           <button onClick={() => setIsKidsCatalogOpen(true)} className={styles.btnSecondary}>Catálogo Infantil</button>
         </div>
+
+        <ContactTicker />
       </div>
       
       {/* Divisor suave estilo tela (Pliegues superpuestos) */}
