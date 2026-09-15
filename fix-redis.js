@@ -5,21 +5,20 @@ env.split('\n').forEach(line => {
   if(line.startsWith('REDIS_URL=')) kvUrl = line.substring(10).trim().replace(/^"|"$/g, '');
 });
 
-console.log('Connecting to:', kvUrl);
-
 const Redis = require('ioredis');
 const redis = new Redis(kvUrl);
+const REDIS_KEY = 'contex_portfolio_content';
 
 async function fix() {
   try {
-    const res = await redis.get('content');
+    const res = await redis.get(REDIS_KEY);
     if (res) {
       let data = res.replace(/&nbsp;/g, ' ');
       data = data.replace(/mconsolid/g, 'consolid');
-      await redis.set('content', data);
-      console.log('Fixed typo and non-breaking spaces in Redis');
+      await redis.set(REDIS_KEY, data);
+      console.log('Fixed typo and non-breaking spaces in Redis for key:', REDIS_KEY);
     } else {
-      console.log('No content in Redis');
+      console.log('No content in Redis for key:', REDIS_KEY);
     }
   } catch(e) {
     console.error(e);

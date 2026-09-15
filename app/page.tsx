@@ -38,7 +38,7 @@ export default async function Home() {
       <AboutUs data={content?.about} />
       
       {/* 2.5 Líneas de Excelencia / Pilares */}
-      <FeaturedPillars data={content?.featuredPillars} />
+      <FeaturedPillars data={content?.featuredPillars} generalTitle={content?.featuredPillarsTitle} />
       
       {/* 3. Propuesta de Valor */}
       <ValueProposition data={content?.valueProposition} />

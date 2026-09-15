@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Inter, Playfair_Display, Dancing_Script, Fredoka } from "next/font/google";
 import Navbar from "./components/Navbar";
-import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingShopButton from "./components/FloatingShopButton";
 import fs from 'fs';
 import path from 'path';
@@ -79,7 +78,6 @@ export default function RootLayout({
         <main className="flex-grow w-full overflow-x-hidden max-w-[100%]">
           {children}
         </main>
-        <WhatsAppButton />
         <FloatingShopButton />
       </body>
     </html>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './FeaturedPillars.module.css';
 
-export default function FeaturedPillars({ data }: { data?: any[] }) {
+export default function FeaturedPillars({ data, generalTitle }: { data?: any[], generalTitle?: string }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -36,9 +36,8 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-        >
-          Tejemos calidad que<br /><span>genera impacto.</span>
-        </motion.h2>
+          dangerouslySetInnerHTML={{ __html: generalTitle || 'Tejemos calidad que<br /><span>genera impacto.</span>' }}
+        />
       </div>
 
       <div className={styles.container}>
@@ -104,7 +103,23 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                   key={pillar.id}
                   className={styles.card}
                   onClick={() => setActiveIndex(index)}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xPct = (x / rect.width - 0.5) * 2;
+                    const yPct = (y / rect.height - 0.5) * 2;
+                    e.currentTarget.style.setProperty('--t-x', `${xPct * 15}deg`);
+                    e.currentTarget.style.setProperty('--t-y', `${-yPct * 15}deg`);
+                    e.currentTarget.style.setProperty('--m-x', `${x}px`);
+                    e.currentTarget.style.setProperty('--m-y', `${y}px`);
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.setProperty('--t-x', '0deg');
+                    e.currentTarget.style.setProperty('--t-y', '0deg');
+                  }}
                   initial={false}
+                  whileHover={diff !== 0 ? { scale: scale * 1.05, opacity: opacity + 0.2, x: x - (isMobile ? 10 : 20) } : {}}
                   animate={{
                     x: x,
                     y: y,
@@ -116,15 +131,39 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 25 }}
                   style={{
-                    background: "white",
-                    boxShadow: diff === 0 ? `0 20px 40px ${pillar.color}20` : "0 4px 12px rgba(0,0,0,0.05)",
-                    border: diff === 0 ? `1px solid ${pillar.color}40` : "1px solid #e2e8f0"
+                    background: "rgba(255, 255, 255, 0.9)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    boxShadow: diff === 0 ? `0 30px 60px -15px ${pillar.color}40, inset 0 0 0 1px rgba(255,255,255,0.8)` : "0 10px 30px -10px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.5)",
+                    /* border removed to use dynamic shimmer pseudo-border */
                   }}
                 >
-                  <div className={styles.cardBg} style={{ background: pillar.color }}></div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }}>
-                    <div className={styles.watermark}>{pillar.number}</div>
-                    <h3 className={styles.cardTitle}>{pillar.shortTitle}</h3>
+                  {/* Dynamic Shimmer Border */}
+                  {diff === 0 && <div className={styles.cardBorder} />}
+                  
+                  <div className={styles.cardInner}>
+                    {/* Glowing background orbs (Volumetric Depth: Pushed back) */}
+                    <div className={styles.cardBg} style={{ background: pillar.color, transform: 'translateZ(-30px)' }}></div>
+                    
+                    {/* Textures and Shapes (Volumetric Depth: Mid layers) */}
+                    <div className={styles.cardPattern} style={{ transform: 'translateZ(-10px)' }}></div>
+                    
+                    {/* Glass Reflection Slash */}
+                    <div className={styles.glassSlash}></div>
+                    
+                    {/* Huge Number Watermark (Volumetric Depth: Pushed forward) */}
+                    <div className={styles.watermark} style={{ transform: 'translateZ(50px)' }}>{pillar.number}</div>
+                    
+                    {/* Content Container aligned to bottom-left (Volumetric Depth: Floating) */}
+                    <div className={styles.cardContent} style={{ transform: 'translateZ(70px)' }}>
+                      <div className={styles.cardIconWrapper} style={{ background: `${pillar.color}20`, color: pillar.color }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                      </div>
+                      <h3 className={styles.cardTitle}>{pillar.shortTitle}</h3>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -151,40 +190,41 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
             >
               <motion.div 
                 className={styles.subtitle}
-                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } } }}
+                style={{ color: pillarsData[activeIndex]?.color }}
               >
                 {pillarsData[activeIndex]?.subtitle}
               </motion.div>
               
               <motion.h3 
                 className={styles.descriptionTitle}
-                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100, delay: 0.1 } } }}
               >
                 {pillarsData[activeIndex]?.title}
               </motion.h3>
               
               <motion.p 
                 className={styles.descriptionText}
-                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, delay: 0.2 } } }}
               >
                 {pillarsData[activeIndex]?.description}
               </motion.p>
               
               <motion.div 
                 className={styles.tagsContainer}
-                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, delay: 0.3 } } }}
               >
                 {(pillarsData[activeIndex]?.tags || []).map((tag: string, i: number) => (
                   <span key={i} className={styles.tag}>{tag}</span>
                 ))}
               </motion.div>
+
+              <div className={styles.controls} style={{ marginTop: '2rem' }}>
+                <button className={styles.navButton} onClick={prevCard} aria-label="Anterior"><ChevronLeft size={24} /></button>
+                <button className={styles.navButton} onClick={nextCard} aria-label="Siguiente"><ChevronRight size={24} /></button>
+              </div>
             </motion.div>
           </AnimatePresence>
-          
-          <div className={styles.controls}>
-            <button className={styles.navButton} onClick={prevCard} aria-label="Anterior"><ChevronLeft size={24} /></button>
-            <button className={styles.navButton} onClick={nextCard} aria-label="Siguiente"><ChevronRight size={24} /></button>
-          </div>
         </div>
       </div>
     </section>

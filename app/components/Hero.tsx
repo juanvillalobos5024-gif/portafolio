@@ -51,7 +51,10 @@ export default function Hero({ data }: { data?: any }) {
           <button onClick={() => setIsKidsCatalogOpen(true)} className={styles.btnSecondary}>Catálogo Infantil</button>
         </div>
 
-        <ContactTicker />
+        {/* Break out of container to be full width, but keep natural flow margin */}
+        <div style={{ marginTop: '3rem', width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+          <ContactTicker />
+        </div>
       </div>
       
       {/* Divisor suave estilo tela (Pliegues superpuestos) */}

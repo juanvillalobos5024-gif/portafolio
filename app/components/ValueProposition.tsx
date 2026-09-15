@@ -1,5 +1,8 @@
+"use client";
+
 import styles from './ValueProposition.module.css';
 import { ShieldCheck, Target, TrendingUp, Users, CheckCircle, Star, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const icons = [
   <ShieldCheck key="shield" size={32} />,
@@ -57,12 +60,50 @@ export default function ValueProposition({ data }: { data?: any }) {
         <h2 className={styles.title}>{data?.title || "¿Por qué elegir Contex?"}</h2>
         
         <div className={styles.grid}>
-          {values.map((item: any) => (
-            <div key={item.id} className={styles.card}>
-              <div className={styles.iconWrapper}>{item.icon}</div>
-              <h3 className={styles.cardTitle}>{item.title}</h3>
-              <p className={styles.cardText}>{item.description}</p>
-            </div>
+          {values.map((item: any, i: number) => (
+            <motion.div
+              key={item.id}
+              className={styles.cardWrapper}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: (i) => ({
+                  opacity: 1,
+                  y: 0,
+                  transition: { delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+                })
+              }}
+            >
+              <div 
+                className={styles.card}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  e.currentTarget.style.setProperty('--m-x', `${x}px`);
+                  e.currentTarget.style.setProperty('--m-y', `${y}px`);
+                  
+                  const xPct = (x / rect.width - 0.5) * 2;
+                  const yPct = (y / rect.height - 0.5) * 2;
+                  e.currentTarget.style.setProperty('--t-x', `${xPct * 8}deg`);
+                  e.currentTarget.style.setProperty('--t-y', `${-yPct * 8}deg`);
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.setProperty('--t-x', '0deg');
+                  e.currentTarget.style.setProperty('--t-y', '0deg');
+                }}
+              >
+                <div className={styles.spotlight}></div>
+                <div className={styles.iconWrapper}>{item.icon}</div>
+                <div className={styles.cardContent}>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                  <p className={styles.cardText}>{item.description}</p>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

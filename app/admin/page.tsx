@@ -694,7 +694,7 @@ export default function AdminDashboard() {
             <div className={styles.subTabContainer}>
               <button className={`${styles.subTab} ${subTab === 'hero' ? styles.active : ''}`} onClick={() => setSubTab('hero')}>Inicio (Banners)</button>
               <button className={`${styles.subTab} ${subTab === 'about' ? styles.active : ''}`} onClick={() => setSubTab('about')}>Quiénes Somos</button>
-              <button className={`${styles.subTab} ${subTab === 'pillars' ? styles.active : ''}`} onClick={() => setSubTab('pillars')}>Pilares (Tarjetas)</button>
+              <button className={`${styles.subTab} ${subTab === 'pillars' ? styles.active : ''}`} onClick={() => setSubTab('pillars')}>Tarjetas</button>
               <button className={`${styles.subTab} ${subTab === 'value' ? styles.active : ''}`} onClick={() => setSubTab('value')}>Por qué elegirnos</button>
               <button className={`${styles.subTab} ${subTab === 'contact' ? styles.active : ''}`} onClick={() => setSubTab('contact')}>Contacto</button>
               <button className={`${styles.subTab} ${subTab === 'seo' ? styles.active : ''}`} onClick={() => setSubTab('seo')}>SEO Metadatos</button>
@@ -763,15 +763,16 @@ export default function AdminDashboard() {
 
             {subTab === 'pillars' && (
               <div className={styles.card}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h2 className={styles.cardTitle} style={{ margin: 0 }}>Líneas de Excelencia (Pilares 3D)</h2>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '1rem' }}>
                   <button onClick={handleAddPillar} style={{ background: 'var(--contex-green)', color: 'black', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                     <Plus size={16} /> Añadir Tarjeta
                   </button>
                 </div>
-                <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                  Para mantener la integridad de la animación 3D, se recomienda un máximo de 6 tarjetas.
-                </p>
+                
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>Título</label>
+                  <input type="text" className={styles.input} placeholder="Tejemos calidad que<br /><span>genera impacto.</span>" value={content.featuredPillarsTitle || ''} onChange={e => handleChange('', 'featuredPillarsTitle', e.target.value)} />
+                </div>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                   {(content.featuredPillars || []).map((card: any) => (
@@ -781,7 +782,16 @@ export default function AdminDashboard() {
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1rem' }}>
                         <div>
                           <label className={styles.label}>Número (Marca de agua y subtítulo)</label>
-                          <input type="text" className={styles.input} placeholder="Ej: 01" value={card.number || ''} onChange={e => { handleUpdatePillar(card.id, 'number', e.target.value); handleUpdatePillar(card.id, 'subtitle', e.target.value); }} />
+                          <input type="text" className={styles.input} placeholder="Ej: 01" value={card.number || ''} onChange={e => { 
+                            const val = e.target.value;
+                            const newContent = { ...content };
+                            newContent.featuredPillars = [...(content.featuredPillars || [])];
+                            const idx = newContent.featuredPillars.findIndex((p: any) => p.id === card.id);
+                            if (idx !== -1) {
+                              newContent.featuredPillars[idx] = { ...newContent.featuredPillars[idx], number: val, subtitle: val };
+                            }
+                            pushHistory(newContent);
+                          }} />
                         </div>
                         <div>
                           <label className={styles.label}>Color Principal (Hex)</label>
