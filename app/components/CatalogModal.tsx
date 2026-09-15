@@ -900,25 +900,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
 
               </HTMLFlipBook>
 
-              {/* EFECTO HOJAS APILADAS A LA IZQUIERDA (Páginas leídas) */}
-              <div 
-                className={styles.stackedPagesLeft}
-                style={{
-                  width: `${Math.min(currentPage * 2.5, 20)}px`,
-                  opacity: currentPage > 0 ? 1 : 0,
-                  transition: 'width 0.3s ease, opacity 0.3s ease'
-                }}
-              />
 
-              {/* EFECTO HOJAS APILADAS A LA DERECHA (Páginas por leer) */}
-              <div 
-                className={styles.stackedPagesRight}
-                style={{
-                  width: `${Math.min((totalPages - currentPage) * 2.5, 20)}px`,
-                  opacity: currentPage < totalPages ? 1 : 0,
-                  transition: 'width 0.3s ease, opacity 0.3s ease'
-                }}
-              />
             </>
           )}
           </div>

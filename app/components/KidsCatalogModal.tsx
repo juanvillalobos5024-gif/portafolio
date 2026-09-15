@@ -564,7 +564,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                         
                         <div style={{ marginTop: 'auto' }}>
                           <h3 style={{ fontSize: isMobile ? '0.65rem' : '0.85rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.4rem' }}>Vistas disponibles:</h3>
-                          <DesignPaletteContainer>
+                          <ColorPaletteContainer isMobile={isMobile}>
                             {currentViewOptions.map(viewKey => (
                                <DesignSwatch 
                                  key={viewKey}
@@ -575,7 +575,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                                  onClick={(e: any) => { e.stopPropagation(); setCharacterViews(prev => ({...prev, [key]: viewKey})); }}
                                />
                             ))}
-                          </DesignPaletteContainer>
+                          </ColorPaletteContainer>
                         </div>
                       </div>
                     </Page>
@@ -614,75 +614,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               })()}
             </HTMLFlipBook>
 
-              {/* Stacked pages - left side (pages already read) */}
-              {(() => {
-                const currentTotalPages = 2 + indexOffset + (Object.keys(kidsLicensesData).length * 2);
-                return (
-                  <>
-                    {currentPage > 0 && (
-                      <div style={{
-                        position: 'absolute',
-                        left: 0,
-                        top: '1%',
-                        width: `${Math.min(currentPage * 2.5, 20)}px`,
-                        height: '98%',
-                        zIndex: -1,
-                        pointerEvents: 'none',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        background: 'linear-gradient(to left, #e8e4df, #c9c5c0)',
-                        borderTopLeftRadius: '4px',
-                        borderBottomLeftRadius: '4px',
-                        boxShadow: '-3px 0 10px rgba(0,0,0,0.15), inset -2px 0 5px rgba(0,0,0,0.05)',
-                        transform: 'translateX(-95%)'
-                      }}>
-                        {/* Líneas simulando hojas */}
-                        {Array.from({ length: Math.min(currentPage, 8) }).map((_, i) => (
-                          <div key={`left-${i}`} style={{
-                            position: 'absolute',
-                            right: `${i * 2.5}px`,
-                            top: 0,
-                            bottom: 0,
-                            width: '1px',
-                            background: 'rgba(255,255,255,0.4)',
-                          }} />
-                        ))}
-                      </div>
-                    )}
-
-                    {currentPage < currentTotalPages - 2 && (
-                      <div style={{
-                        position: 'absolute',
-                        right: 0,
-                        top: '1%',
-                        width: `${Math.min((totalPages - currentPage) * 2.5, 20)}px`,
-                        height: '98%',
-                        zIndex: -1,
-                        pointerEvents: 'none',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        background: 'linear-gradient(to right, #e8e4df, #c9c5c0)',
-                        borderTopRightRadius: '4px',
-                        borderBottomRightRadius: '4px',
-                        boxShadow: '3px 0 10px rgba(0,0,0,0.15), inset 2px 0 5px rgba(0,0,0,0.05)',
-                        transform: 'translateX(95%)'
-                      }}>
-                        {/* Líneas simulando hojas */}
-                        {Array.from({ length: Math.min((currentTotalPages - currentPage), 8) }).map((_, i) => (
-                          <div key={`right-${i}`} style={{
-                            position: 'absolute',
-                            left: `${i * 2.5}px`,
-                            top: 0,
-                            bottom: 0,
-                            width: '1px',
-                            background: 'rgba(255,255,255,0.4)',
-                          }} />
-                        ))}
-                      </div>
-                    )}
-                  </>
-                );
-              })()}
           </>
           </div>
         </div>
