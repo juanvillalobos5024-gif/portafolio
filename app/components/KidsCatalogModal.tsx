@@ -453,6 +453,10 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
             </button>
           </div>
           {isMobile && (
+            <div className={`${styles.swipeHintOverlay} ${!showSwipeHint ? styles.hidden : ''}`}>
+              <div className={styles.swipeHand}></div>
+            </div>
+          )}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
           <div 
             className={styles.bookContainer}
@@ -685,7 +689,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                   </>
                 );
               })()}
-              </HTMLFlipBook>
           </>
           </div>
         </div>
