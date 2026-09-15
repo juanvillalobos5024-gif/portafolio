@@ -151,17 +151,17 @@ const PageOverlay = ({ side }: { side: 'left' | 'right' }) => {
   );
 };
 
-const ColorPaletteContainer = ({ children, compact = false }: { children: React.ReactNode, compact?: boolean }) => (
+const ColorPaletteContainer = ({ children, compact = false, isMobile = false }: { children: React.ReactNode, compact?: boolean, isMobile?: boolean }) => (
   <div style={{ 
     border: '1px solid #f0e6d2', 
     borderRadius: compact ? '8px' : '12px', 
-    padding: compact ? '0.5rem' : '1rem', 
+    padding: compact || isMobile ? '0.3rem' : '1rem', 
     backgroundColor: '#fff', 
     boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: compact ? '0.5rem' : '1rem',
-    marginTop: '0.5rem',
+    gap: compact || isMobile ? '0.3rem' : '1rem',
+    marginTop: '0.2rem',
     position: 'relative',
     zIndex: 100
   }}>
@@ -255,7 +255,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
     const selected = getSelectedColor(collectionKey);
 
     return (
-      <ColorPaletteContainer>
+      <ColorPaletteContainer isMobile={isMobile}>
         {/* 1. Tarjeta Principal (siempre al inicio en la cabecera de la cola) */}
         <div 
           onClick={() => setSelectedColor(collectionKey, 'general')}
@@ -267,25 +267,25 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
             opacity: selected === 'general' ? 1 : 0.7, 
             transition: 'all 0.2s ease', 
             transform: selected === 'general' ? 'scale(1.05)' : 'scale(1)', 
-            width: '65px' 
+            width: isMobile ? '40px' : '65px' 
           }}
           title="Imagen Principal"
         >
           <div style={{ 
-            width: '60px', 
-            height: '40px', 
+            width: isMobile ? '40px' : '60px', 
+            height: isMobile ? '25px' : '40px', 
             background: mainHex, 
             borderRadius: '6px', 
             border: selected === 'general' ? '2px solid var(--contex-dark)' : '1px solid #e2e8f0', 
             boxShadow: selected === 'general' ? '0 4px 8px rgba(0,0,0,0.15)' : '0 2px 4px rgba(0,0,0,0.05)', 
-            marginBottom: '0.3rem' 
+            marginBottom: '0.2rem' 
           }}></div>
           <span style={{ 
-            fontSize: '0.65rem', 
+            fontSize: isMobile ? '0.45rem' : '0.65rem', 
             textAlign: 'center', 
             color: selected === 'general' ? 'var(--contex-dark)' : '#64748b', 
             fontWeight: selected === 'general' ? '600' : '400', 
-            lineHeight: '1.2' 
+            lineHeight: '1.1' 
           }}>
             {mainName}
           </span>
@@ -304,24 +304,24 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               opacity: selected === c.id ? 1 : 0.7, 
               transition: 'all 0.2s ease', 
               transform: selected === c.id ? 'scale(1.05)' : 'scale(1)', 
-              width: '65px' 
+              width: isMobile ? '40px' : '65px' 
             }}
           >
             <div style={{ 
-              width: '60px', 
-              height: '40px', 
+              width: isMobile ? '40px' : '60px', 
+              height: isMobile ? '25px' : '40px', 
               background: c.hex || '#cccccc', 
               borderRadius: '6px', 
               border: selected === c.id ? '2px solid var(--contex-dark)' : '1px solid #e2e8f0', 
               boxShadow: selected === c.id ? '0 4px 8px rgba(0,0,0,0.15)' : '0 2px 4px rgba(0,0,0,0.05)', 
-              marginBottom: '0.3rem' 
+              marginBottom: '0.2rem' 
             }}></div>
             <span style={{ 
-              fontSize: '0.65rem', 
+              fontSize: isMobile ? '0.45rem' : '0.65rem', 
               textAlign: 'center', 
               color: selected === c.id ? 'var(--contex-dark)' : '#64748b', 
               fontWeight: selected === c.id ? '600' : '400', 
-              lineHeight: '1.2' 
+              lineHeight: '1.1' 
             }}>
               {c.name || 'Color'}
             </span>
@@ -357,15 +357,22 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
 
     const updateScale = () => {
       if (typeof window !== 'undefined') {
-        const mobile = window.innerWidth <= 768;
+        const isPortrait = window.innerHeight > window.innerWidth;
+        // Check if device is a phone even in landscape (height very small or width <= 768)
+        const mobile = window.innerWidth <= 768 || window.innerHeight <= 500 || /Mobi|Android/i.test(navigator.userAgent);
         setIsMobile(mobile);
-        if (mobile) {
-          setScale(1);
-        } else {
-          const scaleX = (window.innerWidth * 0.85) / 1000;
-          const scaleY = (window.innerHeight * 0.95) / 650;
-          setScale(Math.min(scaleX, scaleY, 1.2));
+        
+        let availableWidth = window.innerWidth;
+        let availableHeight = window.innerHeight;
+        
+        if (mobile && isPortrait) {
+          availableWidth = window.innerHeight;
+          availableHeight = window.innerWidth;
         }
+
+        const scaleX = (availableWidth * (mobile ? 0.95 : 0.85)) / 1000;
+        const scaleY = (availableHeight * 0.95) / 650;
+        setScale(Math.min(scaleX, scaleY, 1.2));
       }
     };
     updateScale();
@@ -526,7 +533,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               <Page number={2} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '2rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', lineHeight: 1.1 }}>
+                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: isMobile ? '1rem' : '2rem', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.5rem' : '1.5rem', lineHeight: 1.1 }}>
                     Nuestra<br/>Historia
                   </h2>
                   {catalogSettings?.historyHtml ? (
@@ -557,7 +564,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               <Page number={3} isRight={true}>
                 <PageBackground side="right" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
-                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>
+                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: isMobile ? '1rem' : '1.8rem', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.5rem' : '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>
                     Índice
                   </h2>
                   
@@ -612,7 +619,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                   
                   <div style={{ marginTop: '1.5rem' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.8rem' }}>
+                    <h3 style={{ fontSize: isMobile ? '0.6rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.3rem' : '0.6rem' }}>
                       Colores Disponibles:
                     </h3>
                     {renderCollectionPalette('romana')}
@@ -651,7 +658,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                   
                   <div style={{ marginTop: '1.2rem' }}>
-                    <h3 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>
+                    <h3 style={{ fontSize: isMobile ? '0.6rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.3rem' : '0.6rem' }}>
                       Colores Disponibles:
                     </h3>
                     {renderCollectionPalette('royal')}
@@ -690,7 +697,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
 
                   <div style={{ marginTop: '1.2rem' }}>
-                    <h3 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>
+                    <h3 style={{ fontSize: isMobile ? '0.6rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.3rem' : '0.6rem' }}>
                       Colores Disponibles:
                     </h3>
                     {renderCollectionPalette('toscana')}
@@ -729,7 +736,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
 
                   <div style={{ marginTop: '1.2rem' }}>
-                    <h3 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>
+                    <h3 style={{ fontSize: isMobile ? '0.6rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.3rem' : '0.6rem' }}>
                       Colores Disponibles:
                     </h3>
                     {renderCollectionPalette('home')}
@@ -763,7 +770,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
 
                   <div style={{ marginTop: '1.2rem' }}>
-                    <h3 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>Colores Disponibles:</h3>
+                    <h3 style={{ fontSize: isMobile ? '0.6rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.3rem' : '0.6rem' }}>Colores Disponibles:</h3>
                     {renderCollectionPalette('sonata')}
                   </div>
                 </div>
@@ -795,7 +802,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
 
                   <div style={{ marginTop: '1.2rem' }}>
-                    <h3 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>Colores Disponibles:</h3>
+                    <h3 style={{ fontSize: isMobile ? '0.75rem' : '0.95rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.6rem' }}>Colores Disponibles:</h3>
                     {renderCollectionPalette('tropical')}
                   </div>
                 </div>

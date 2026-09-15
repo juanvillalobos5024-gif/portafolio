@@ -162,7 +162,7 @@ const PageOverlay = ({ side }: { side: 'left' | 'right' }) => {
   );
 };
 
-const DesignSwatch = ({ viewKey, label, imageUrl, selected, onClick, compact = false }: { viewKey: string, label: string, imageUrl: string, selected: boolean, onClick: (e: any) => void, compact?: boolean }) => {
+const DesignSwatch = ({ viewKey, label, imageUrl, selected, onClick, compact = false, isMobile = false }: { viewKey: string, label: string, imageUrl: string, selected: boolean, onClick: (e: any) => void, compact?: boolean, isMobile?: boolean }) => {
   return (
     <div 
       onClick={onClick}
@@ -174,26 +174,26 @@ const DesignSwatch = ({ viewKey, label, imageUrl, selected, onClick, compact = f
         opacity: selected ? 1 : 0.7,
         transition: 'all 0.2s ease',
         transform: selected ? 'scale(1.05)' : 'scale(1)',
-        width: compact ? '50px' : '65px',
+        width: isMobile ? '40px' : (compact ? '50px' : '65px'),
       }}
     >
       <div style={{
-        width: compact ? '44px' : '60px',
-        height: compact ? '30px' : '40px',
+        width: isMobile ? '40px' : (compact ? '44px' : '60px'),
+        height: isMobile ? '25px' : (compact ? '30px' : '40px'),
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'top',
         borderRadius: '6px',
         border: selected ? '2px solid var(--contex-dark)' : '1px solid #e2e8f0',
         boxShadow: selected ? '0 4px 8px rgba(0,0,0,0.15)' : '0 2px 4px rgba(0,0,0,0.05)',
-        marginBottom: '0.3rem'
+        marginBottom: isMobile ? '0.2rem' : '0.3rem'
       }}></div>
       <span style={{ 
-        fontSize: compact ? '0.55rem' : '0.65rem', 
+        fontSize: isMobile ? '0.45rem' : (compact ? '0.55rem' : '0.65rem'), 
         textAlign: 'center', 
         color: selected ? 'var(--contex-dark)' : '#64748b',
         fontWeight: selected ? '600' : '400',
-        lineHeight: '1.2'
+        lineHeight: isMobile ? '1.1' : '1.2'
       }}>
         {label}
       </span>
@@ -201,17 +201,17 @@ const DesignSwatch = ({ viewKey, label, imageUrl, selected, onClick, compact = f
   );
 };
 
-const DesignPaletteContainer = ({ children, compact = false }: { children: React.ReactNode, compact?: boolean }) => (
+const ColorPaletteContainer = ({ children, compact = false, isMobile = false }: { children: React.ReactNode, compact?: boolean, isMobile?: boolean }) => (
   <div style={{ 
     border: '1px solid #f0e6d2', 
     borderRadius: compact ? '8px' : '12px', 
-    padding: compact ? '0.5rem' : '1rem', 
+    padding: compact || isMobile ? '0.3rem' : '1rem', 
     backgroundColor: '#fff', 
     boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: compact ? '0.5rem' : '1rem',
-    marginTop: '0.5rem',
+    gap: compact || isMobile ? '0.3rem' : '1rem',
+    marginTop: '0.2rem',
     position: 'relative',
     zIndex: 100
   }}>
@@ -254,7 +254,8 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
     const updateScale = () => {
       if (typeof window !== 'undefined') {
         const isPortrait = window.innerHeight > window.innerWidth;
-        const mobile = window.innerWidth <= 768 || (isPortrait && window.innerHeight <= 768);
+        // Check if device is a phone even in landscape (height very small or width <= 768)
+        const mobile = window.innerWidth <= 768 || window.innerHeight <= 500 || /Mobi|Android/i.test(navigator.userAgent);
         setIsMobile(mobile);
         
         let availableWidth = window.innerWidth;
@@ -280,7 +281,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
   }, [isOpen]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768 || window.innerHeight <= 500 || /Mobi|Android/i.test(navigator.userAgent));
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -529,7 +530,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                     <Page key="index-right" number={3} isRight={true}>
                       <PageBackground side="right" variant="kids" />
                       <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
-                        <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.8rem', color: 'var(--contex-dark)', marginBottom: '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>Índice</h2>
+                        <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: isMobile ? '1rem' : '1.8rem', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.5rem' : '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>Índice</h2>
                         <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
                       </div>
                     </Page>
@@ -562,7 +563,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                         </div>
                         
                         <div style={{ marginTop: 'auto' }}>
-                          <h3 style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.4rem' }}>Vistas disponibles:</h3>
+                          <h3 style={{ fontSize: isMobile ? '0.65rem' : '0.85rem', fontWeight: 'bold', color: 'var(--contex-dark)', marginBottom: '0.4rem' }}>Vistas disponibles:</h3>
                           <DesignPaletteContainer>
                             {currentViewOptions.map(viewKey => (
                                <DesignSwatch 

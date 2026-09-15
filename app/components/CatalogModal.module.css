@@ -232,51 +232,51 @@
 
 @media (max-width: 768px) {
   .bookContainer {
-    padding: 0.5rem;
+    padding: 0;
   }
   
   .pageContent {
-    padding: 1.2rem 1rem;
+    padding: 0.6rem;
   }
   
   .pageTitle {
-    font-size: 1.3rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.15rem;
   }
 
   .cursiveAccent {
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
   }
   
   .pageText {
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.55rem;
+    line-height: 1.2;
   }
   
   .closeButton {
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
+    top: 0.3rem;
+    right: 0.3rem;
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
   }
 
   .specsGrid {
-    gap: 0.4rem;
-    margin: 0.6rem 0;
+    gap: 0.25rem;
+    margin: 0.3rem 0;
   }
 
   .specCard {
-    padding: 0.5rem;
+    padding: 0.2rem 0.3rem;
   }
 
   .specTitle {
-    font-size: 0.55rem;
+    font-size: 0.35rem;
   }
 
   .specValue {
-    font-size: 0.7rem;
+    font-size: 0.45rem;
   }
 
   .pageNumber {
