@@ -57,7 +57,7 @@ export default function Navbar() {
       <Link href="#inicio" className={styles.logoContainer} aria-label="Ir al inicio" onClick={closeMobileMenu}>
         <Image
           src="/logo-contex.png" 
-          alt="Logo CONTEX SAS"
+          alt="Logotipo oficial de CONTEX Compañía Nacional de Textiles S.A.S."
           width={180}
           height={60}
           className={styles.logoImage}

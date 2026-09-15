@@ -29,7 +29,7 @@ export default function Hero({ data }: { data?: any }) {
         <div className={styles.heroLogoWrapper}>
           <Image
             src="/logo-contex.png"
-            alt="Logo CONTEX SAS"
+            alt="Logotipo principal de CONTEX Compañía Nacional de Textiles S.A.S."
             width={600}
             height={180}
             className={styles.heroLogo}

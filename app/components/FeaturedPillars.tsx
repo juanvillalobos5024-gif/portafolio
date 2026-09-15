@@ -121,9 +121,11 @@ export default function FeaturedPillars({ data }: { data?: any[] }) {
                     border: diff === 0 ? `1px solid ${pillar.color}40` : "1px solid #e2e8f0"
                   }}
                 >
-                  <div className={styles.watermark}>{pillar.number}</div>
                   <div className={styles.cardBg} style={{ background: pillar.color }}></div>
-                  <h3 className={styles.cardTitle}>{pillar.shortTitle}</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }}>
+                    <div className={styles.watermark}>{pillar.number}</div>
+                    <h3 className={styles.cardTitle}>{pillar.shortTitle}</h3>
+                  </div>
                 </motion.div>
               );
             })}

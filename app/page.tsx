@@ -5,7 +5,6 @@ import AboutUs from "./components/AboutUs";
 import FeaturedPillars from "./components/FeaturedPillars";
 import ValueProposition from "./components/ValueProposition";
 import ContactSection from "./components/ContactSection";
-import GlobalThread from "./components/GlobalThread";
 import Redis from 'ioredis';
 
 export const dynamic = 'force-dynamic';
@@ -30,9 +29,7 @@ export default async function Home() {
   }
 
   return (
-    <main style={{ position: 'relative' }}>
-      {/* Hilo Conductor Global */}
-      <GlobalThread />
+    <div style={{ position: 'relative', width: '100%', overflowX: 'hidden' }}>
       
       {/* 1. Hero Section */}
       <Hero data={content?.hero} />

@@ -454,8 +454,8 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               📄
             </a>
 
-            <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
-              ✕
+            <button className={styles.toolButton} onClick={onClose} aria-label="Cerrar catálogo" title="Cerrar catálogo" style={{ width: '35px', height: '35px', fontSize: '1.2rem' }}>
+              <span aria-hidden="true">✕</span>
             </button>
           </div>
           {isMobile && (
@@ -487,8 +487,11 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 onMouseEnter={(e) => e.currentTarget.style.background = '#fff'}
                 onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
                 aria-label="Página anterior"
+                title="Página anterior"
               >
-                <svg width={isMobile ? '20' : '28'} height={isMobile ? '20' : '28'} viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <span aria-hidden="true">
+                  <svg width={isMobile ? '20' : '28'} height={isMobile ? '20' : '28'} viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </span>
               </button>
               
               {/* Botón Next Visible */}
