@@ -21,7 +21,8 @@
 
 @media (min-width: 768px) {
   .inner {
-    grid-template-columns: 1fr 1fr;
+    /* Mantenemos 1 columna para que el texto ocupe todo el ancho */
+    grid-template-columns: 1fr;
   }
 }
 
