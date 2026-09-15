@@ -37,12 +37,12 @@ export default function Hero({ data }: { data?: any }) {
             priority
           />
         </div>
-        <div className={styles.subtitle}>
-          <p>{data?.title || "Innovación y excelencia textil."}</p>
+        <div className={styles.textContent}>
+          <h2 className={styles.heroSubHeading}>{data?.title || "Innovación y excelencia textil."}</h2>
           {data?.subtitle ? (
-            <div dangerouslySetInnerHTML={{ __html: data.subtitle }} />
+            <div className={styles.subtitle} dangerouslySetInnerHTML={{ __html: data.subtitle }} />
           ) : (
-            <p>Descubre nuestros catálogos de alta calidad para la industria hotelera.</p>
+            <p className={styles.subtitle}>Descubre nuestros catálogos de alta calidad para la industria hotelera.</p>
           )}
         </div>
         

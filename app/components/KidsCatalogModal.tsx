@@ -17,7 +17,7 @@ const Page = React.forwardRef<HTMLDivElement, { children: React.ReactNode; numbe
         ref={ref}
         style={props.isCover ? { padding: 0 } : {}}
       >
-        <div className={styles.pageContent} style={props.isCover ? { padding: 0 } : {}}>
+        <div className={styles.pageContent} style={props.isCover ? { padding: 0, width: '100%', height: '100%' } : {}}>
           {props.children}
         </div>
         {!props.isCover && (
@@ -226,7 +226,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [catalogData, setCatalogData] = useState<any>({});
   const [catalogSettings, setCatalogSettings] = useState<any>({});
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -248,7 +247,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
 
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      setShowSwipeHint(window.innerWidth <= 768);
     } else {
       document.body.style.overflow = 'auto';
     }
@@ -452,11 +450,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               <span aria-hidden="true">✕</span>
             </button>
           </div>
-          {isMobile && (
-            <div className={`${styles.swipeHintOverlay} ${!showSwipeHint ? styles.hidden : ''}`}>
-              <div className={styles.swipeHand}></div>
-            </div>
-          )}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
           <div 
             className={styles.bookContainer}
@@ -501,8 +494,8 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
               <HTMLFlipBook 
                 ref={bookRef}
                 width={isMobile ? 270 : 450} 
-                height={isMobile ? 370 : 600} 
-                size="stretch"
+                height={isMobile ? 370 : 650} 
+                size={isMobile ? 'fixed' : 'stretch'}
                 minWidth={250}
                 maxWidth={600}
                 minHeight={350}
@@ -515,7 +508,6 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                 className="demo-book"
                 onFlip={(e: any) => {
                   setCurrentPage(e.data);
-                  setShowSwipeHint(false);
                 }}
               >
               {(() => {
