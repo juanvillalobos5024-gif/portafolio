@@ -46,6 +46,6 @@ export default async function Home() {
       {/* 5. Contacto y Mapa */}
       <ContactSection data={content?.contact} />
       
-    </main>
+    </div>
   );
 }
