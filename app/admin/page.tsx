@@ -268,7 +268,7 @@ export default function AdminDashboard() {
     pushHistory(newContent);
   };
 
-  const handleUpdateColor = (catalogKey: string, subKey: string, id: string, field: 'name' | 'hex' | 'image' | 'alt', value: string) => {
+  const handleUpdateColor = (catalogKey: string, subKey: string, id: string, field: 'name' | 'hex' | 'image' | 'alt' | 'pantone', value: string) => {
     const newContent = { ...content };
     const colors = newContent[catalogKey][subKey].colors;
     const idx = colors.findIndex((c: any) => c.id === id);
