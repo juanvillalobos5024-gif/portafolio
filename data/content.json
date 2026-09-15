@@ -69,15 +69,17 @@
       "colors": [
         {
           "id": "11579214-6465-4f96-9091-5434f8040819",
-          "name": "Oro Chamgane",
+          "name": "Oro Champag",
           "hex": "#e8d6b3",
-          "image": "/uploads/1788459247623-marron_imperial.webp"
+          "image": "/uploads/1788459247623-marron_imperial.webp",
+          "pantone": "14-1036 TCX"
         },
         {
           "id": "860d7b6a-b15d-4b06-baee-91c84b515ad4",
-          "name": "oro rojo",
+          "name": "Oro Rojo",
           "hex": "#d52020",
-          "image": "/uploads/1789407300587-fondo2.JPG"
+          "image": "/uploads/1789407300587-fondo2.JPG",
+          "pantone": "19-1557 TCX"
         }
       ],
       "mainColorHex": "#2e3947"

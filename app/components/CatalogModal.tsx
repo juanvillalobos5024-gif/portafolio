@@ -320,11 +320,23 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               fontSize: isMobile ? '0.45rem' : '0.65rem', 
               textAlign: 'center', 
               color: selected === c.id ? 'var(--contex-dark)' : '#64748b', 
-              fontWeight: selected === c.id ? '600' : '400', 
+              fontWeight: selected === c.id ? '600' : '500', 
               lineHeight: '1.1' 
             }}>
               {c.name || 'Color'}
             </span>
+            {c.pantone && (
+              <span style={{ 
+                fontSize: isMobile ? '0.4rem' : '0.55rem', 
+                textAlign: 'center', 
+                color: selected === c.id ? 'var(--contex-green)' : '#94a3b8', 
+                fontWeight: '600',
+                marginTop: '0.1rem',
+                lineHeight: '1'
+              }}>
+                {c.pantone}
+              </span>
+            )}
           </div>
         ))}
       </ColorPaletteContainer>

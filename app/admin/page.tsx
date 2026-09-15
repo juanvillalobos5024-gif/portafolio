@@ -626,7 +626,16 @@ export default function AdminDashboard() {
                   </div>
                   <input type="text" className={styles.input} value={c.hex || ''} onChange={e => handleUpdateColor(catalogKey, subKey, c.id, 'hex', e.target.value)} placeholder="#HEX" style={{ width: '80px', textAlign: 'center', fontSize: '0.85rem', padding: '0.3rem' }} />
                 </div>
-                <div style={{ flex: 1 }}><label className={styles.label}>Nombre de Variante</label><input type="text" className={styles.input} value={c.name || ''} onChange={e => handleUpdateColor(catalogKey, subKey, c.id, 'name', e.target.value)} placeholder="Ej: Oro Champagne" /></div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div>
+                    <label className={styles.label}>Nombre de Variante</label>
+                    <input type="text" className={styles.input} value={c.name || ''} onChange={e => handleUpdateColor(catalogKey, subKey, c.id, 'name', e.target.value)} placeholder="Ej: Oro Champagne" />
+                  </div>
+                  <div>
+                    <label className={styles.label}>Pantone (TCX/TPG) - Opcional</label>
+                    <input type="text" className={styles.input} value={c.pantone || ''} onChange={e => handleUpdateColor(catalogKey, subKey, c.id, 'pantone', e.target.value)} placeholder="Ej: 19-4052 TCX" />
+                  </div>
+                </div>
                 <div style={{ flex: 2 }}>
                   <label className={styles.label}>Archivo de Imagen & Texto Alternativo (Alt)</label>
                   <ImageUploader 
