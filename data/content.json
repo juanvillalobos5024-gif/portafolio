@@ -2,13 +2,13 @@
   "hero": {
     "title1": "Innovación y",
     "title2": "excelencia textil",
-    "subtitle": "<p>Descubre&nbsp;nuestros&nbsp;catálogos&nbsp;de&nbsp;alta&nbsp;calidad&nbsp;para&nbsp;la&nbsp;industria&nbsp;hotelera&nbsp;e&nbsp;infantil.</p>",
+    "subtitle": "<p>Descubre nuestros catálogos de alta calidad para la industria hotelera e infantil.</p>",
     "title": "CATALOGOS",
     "bgImage": "/uploads/1789405727436-fondo1.JPG"
   },
   "about": {
     "title": "Nuestra Historia",
-    "bodyHtml": "<p><strong>COMPAÑÍA&nbsp;NACIONAL&nbsp;DE&nbsp;TEXTILES</strong>&nbsp;ha&nbsp;forjado&nbsp;una&nbsp;destacada&nbsp;trayectoria&nbsp;en&nbsp;el&nbsp;sector,</p><p>consolidándose&nbsp;como&nbsp;referente&nbsp;gracias&nbsp;a&nbsp;su&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;calidad,&nbsp;innovación&nbsp;y&nbsp;sostenibilidad.&nbsp;</p><p>Desde&nbsp;sus&nbsp;inicios,&nbsp;ha&nbsp;tejido&nbsp;un&nbsp;camino&nbsp;de&nbsp;éxito,&nbsp;adaptándose&nbsp;a&nbsp;las&nbsp;tendencias&nbsp;del&nbsp;mercado&nbsp;y&nbsp;</p><p>destacando&nbsp;por&nbsp;su&nbsp;capacidad&nbsp;para&nbsp;ofrecer&nbsp;productos&nbsp;textiles&nbsp;como&nbsp;hamacas,&nbsp;toallas,&nbsp;</p><p>almohadas,&nbsp;sábanas,&nbsp;edredones,&nbsp;para&nbsp;el&nbsp;hogar&nbsp;y&nbsp;el&nbsp;sector&nbsp;hotelero.</p><p></p><p>Somos&nbsp;una&nbsp;empresa&nbsp;en&nbsp;constante&nbsp;avance&nbsp;y,&nbsp;nuestro&nbsp;compromiso&nbsp;con&nbsp;la&nbsp;<em>sostenibilidad</em>&nbsp;se&nbsp;refleja</p><p>en&nbsp;la&nbsp;producción&nbsp;de&nbsp;Hilo&nbsp;reciclado&nbsp;para&nbsp;la&nbsp;elaboración&nbsp;de&nbsp;los&nbsp;productos&nbsp;textiles,&nbsp;abriendo&nbsp;paso&nbsp;hacia&nbsp;</p><p>una&nbsp;industria&nbsp;más&nbsp;responsable,&nbsp;marcando&nbsp;así&nbsp;el&nbsp;rumbo&nbsp;hacia&nbsp;un&nbsp;futuro&nbsp;textil&nbsp;más&nbsp;ecoamigable.</p><ul><li>Calidad&nbsp;garantizada</li><li>Sostenibilidad</li><li>Innovación&nbsp;textil</li></ul>",
+    "bodyHtml": "<p><strong>COMPAÑÍA NACIONAL DE TEXTILES</strong> ha forjado una destacada trayectoria en el sector,</p><p>consolidándose como referente gracias a su compromiso con la calidad, innovación y sostenibilidad. </p><p>Desde sus inicios, ha tejido un camino de éxito, adaptándose a las tendencias del mercado y </p><p>destacando por su capacidad para ofrecer productos textiles como hamacas, toallas, </p><p>almohadas, sábanas, edredones, para el hogar y el sector hotelero.</p><p></p><p>Somos una empresa en constante avance y, nuestro compromiso con la <em>sostenibilidad</em> se refleja</p><p>en la producción de Hilo reciclado para la elaboración de los productos textiles, abriendo paso hacia </p><p>una industria más responsable, marcando así el rumbo hacia un futuro textil más ecoamigable.</p><ul><li>Calidad garantizada</li><li>Sostenibilidad</li><li>Innovación textil</li></ul>",
     "image": ""
   },
   "valueProposition": {
@@ -46,7 +46,7 @@
   },
   "contact": {
     "title": "Contáctanos",
-    "subtitle": "<p>Estamos&nbsp;aquí&nbsp;para&nbsp;ayudarte.&nbsp;Si&nbsp;tienes&nbsp;preguntas&nbsp;sobre&nbsp;nuestros&nbsp;productos,&nbsp;catálogos&nbsp;o&nbsp;pedidos&nbsp;al&nbsp;por&nbsp;mayor,&nbsp;no&nbsp;dudes&nbsp;en&nbsp;escribirnos.</p>",
+    "subtitle": "<p>Estamos aquí para ayudarte. Si tienes preguntas sobre nuestros productos, catálogos o pedidos al por mayor, no dudes en escribirnos.</p>",
     "email": "ventas@contex.com.co",
     "phone": "+57 (300) 000-0000",
     "address": "Cl. 76 #7035"
@@ -258,7 +258,7 @@
     "keywords": ""
   },
   "mainCatalogSettings": {
-    "indexHtml": "<p>Colecion&nbsp;Royal</p>",
+    "indexHtml": "<p>Colecion Royal</p>",
     "coverImage": "/uploads/1789406005483-fondo2.JPG",
     "historyHtml": "<p></p>",
     "backCoverImage": "/uploads/1789407056354-fondo1.JPG"
