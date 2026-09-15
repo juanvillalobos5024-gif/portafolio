@@ -84,8 +84,7 @@
   }
   
   .content {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+
   }
   
   .title {
@@ -106,10 +105,7 @@
 
 .richText * {
   max-width: 100% !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
   white-space: normal !important;
-  text-align: justify !important;
   box-sizing: border-box !important;
 }
 
