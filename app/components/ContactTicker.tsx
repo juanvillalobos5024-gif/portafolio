@@ -7,18 +7,18 @@ export default function ContactTicker() {
     <div className={styles.tickerWrapper}>
       <div className={styles.tickerContent}>
         <span className={styles.tickerItem}>
-          <Phone size={18} color="var(--contex-green)" />
-          Teléfono: 605 3319432
+          <Phone size={18} color="var(--contex-green)" style={{ flexShrink: 0 }} />
+          <span>Teléfono: 605 3319432</span>
         </span>
         <span className={styles.tickerSeparator}>|</span>
         <span className={styles.tickerItem}>
-          <Mail size={18} color="var(--contex-green)" />
-          ventas@contexsas.com
+          <Mail size={18} color="var(--contex-green)" style={{ flexShrink: 0 }} />
+          <span>ventas@contexsas.com</span>
         </span>
         <span className={styles.tickerSeparator}>|</span>
         <span className={styles.tickerItem}>
-          <MapPin size={18} color="var(--contex-green)" />
-          Calle 76 # 70-34, Colombia – Atlántico, Barranquilla
+          <MapPin size={18} color="var(--contex-green)" style={{ flexShrink: 0 }} />
+          <span>Calle 76 # 70-34, Colombia – Atlántico, Barranquilla</span>
         </span>
       </div>
     </div>

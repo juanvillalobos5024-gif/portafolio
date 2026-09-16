@@ -40,17 +40,17 @@ export default function ContactSection({ data }: { data?: any }) {
             }} id="contactForm">
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={styles.label}>Nombre o Empresa <span style={{ color: '#ef4444' }}>*</span></label>
-                <input type="text" name="name" id="name" className={styles.input} placeholder="Ej. Hotel del Mar" required />
+                <input suppressHydrationWarning type="text" name="name" id="name" className={styles.input} placeholder="Ej. Hotel del Mar" required />
               </div>
               
               <div className={styles.formGroup}>
                 <label htmlFor="email" className={styles.label}>Correo Electrónico <span style={{ color: '#ef4444' }}>*</span></label>
-                <input type="email" name="email" id="email" className={styles.input} placeholder="ventas@empresa.com" required />
+                <input suppressHydrationWarning type="email" name="email" id="email" className={styles.input} placeholder="ventas@empresa.com" required />
               </div>
 
               <div className={styles.formGroup}>
                 <label htmlFor="phone" className={styles.label}>Teléfono <span style={{ color: '#ef4444' }}>*</span></label>
-                <input type="tel" name="phone" id="phone" className={styles.input} placeholder="+57 300 000 0000" pattern="[0-9\+\-\s\(\)]+" title="Ingresa un número de teléfono válido" required />
+                <input suppressHydrationWarning type="tel" name="phone" id="phone" className={styles.input} placeholder="+57 300 000 0000" pattern="[0-9\+\-\s\(\)]+" title="Ingresa un número de teléfono válido" required />
               </div>
 
               <div className={styles.formGroup}>

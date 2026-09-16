@@ -93,7 +93,7 @@
   margin: 0;
 }
 
-.subtitle {
+.subtitle, .subtitle p {
   font-family: var(--font-sans);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: rgba(255, 255, 255, 0.9);
@@ -227,19 +227,32 @@
   }
   
   .textContent {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 10px;
-    align-items: center;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .heroSubHeading {
     font-size: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
-  .subtitle {
+  .subtitle, .subtitle p {
     font-size: 1.1rem;
     color: #ffffff;
+    padding: 0;
+    margin: 0;
+    white-space: normal !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: normal;
+    overflow-wrap: normal;
+    line-height: 1.5;
   }
   
   /* Hacer la capa oscura más transparente en móviles para apreciar mejor la foto del fondo */

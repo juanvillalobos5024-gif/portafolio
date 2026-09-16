@@ -29,7 +29,7 @@ export async function sendEmail(formData: FormData) {
     // Enviar el correo a la cuenta de pruebas/destino
     await transporter.sendMail({
       from: `"Contex SAS Web" <${process.env.SMTP_USER || "notificaciones@contexsas.com"}>`,
-      to: process.env.SMTP_TO || "auxsistemas@contexsas.com", // Lee la variable SMTP_TO (pueden ser varios separados por coma)
+      to: process.env.SMTP_TO || "ventas@contexsas.com", // Lee la variable SMTP_TO (pueden ser varios separados por coma)
       subject: `Nuevo mensaje de contacto de: ${name}`,
       text: `Nombre: ${name}\nCorreo: ${email}\nTeléfono: ${phone}\nMensaje:\n${message}`,
       html: `

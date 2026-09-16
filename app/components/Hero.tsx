@@ -40,7 +40,11 @@ export default function Hero({ data }: { data?: any }) {
         <div className={styles.textContent}>
           <h2 className={styles.heroSubHeading}>{data?.title || "Innovación y excelencia textil."}</h2>
           {data?.subtitle ? (
-            <div className={styles.subtitle} dangerouslySetInnerHTML={{ __html: data.subtitle }} />
+            <div 
+              className={styles.subtitle} 
+              style={{ whiteSpace: 'normal', wordBreak: 'normal', overflowWrap: 'break-word', width: '100%', display: 'block' }}
+              dangerouslySetInnerHTML={{ __html: data.subtitle.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ') }} 
+            />
           ) : (
             <p className={styles.subtitle}>Descubre nuestros catálogos de alta calidad para la industria hotelera.</p>
           )}
@@ -51,8 +55,7 @@ export default function Hero({ data }: { data?: any }) {
           <button onClick={() => setIsKidsCatalogOpen(true)} className={styles.btnSecondary}>Catálogo Infantil</button>
         </div>
 
-        {/* Break out of container to be full width, but keep natural flow margin */}
-        <div style={{ marginTop: '3rem', width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw' }}>
+        <div style={{ marginTop: '3rem', width: '100%' }}>
           <ContactTicker />
         </div>
       </div>

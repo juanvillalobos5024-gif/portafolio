@@ -44,6 +44,11 @@
     font-size: 0.95rem;
     flex-direction: column;
     gap: 0.8rem;
+    text-align: center;
+  }
+  .tickerItem {
+    justify-content: center;
+    text-align: center;
   }
   .tickerSeparator {
     display: none;
