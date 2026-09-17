@@ -39,7 +39,7 @@ const fredoka = Fredoka({
 // Generación Dinámica de Metadatos (SEO) desde el Admin
 export async function generateMetadata(): Promise<Metadata> {
   let seo = {
-    title: "CONTEX SAS | Textiles en Barranquilla y Dotación Hotelera en Colombia",
+    title: "Home - Contex SAS",
     description: "Fábrica nacional de textiles con años de experiencia. Alta calidad en hilos, telas industriales, ropa de cama y lencería para hoteles en toda Colombia.",
     keywords: "textiles en Barranquilla, dotación hotelera en Colombia, telas industriales, fábrica de textiles, Contex SAS, sábanas para hoteles"
   };
