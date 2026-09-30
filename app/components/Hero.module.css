@@ -65,10 +65,12 @@
 .heroLogoWrapper {
   margin-bottom: 3rem;
   max-width: 100%;
+  margin-left: -18px; /* Compensate for image transparency padding */
 }
 
 .heroLogo {
   object-fit: contain;
+  object-position: left center;
   max-width: 100%;
   height: auto;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));

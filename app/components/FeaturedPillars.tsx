@@ -131,10 +131,10 @@ export default function FeaturedPillars({ data, generalTitle }: { data?: any[], 
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 25 }}
                   style={{
-                    background: "rgba(255, 255, 255, 0.9)",
+                    background: "rgba(255, 255, 255, 0.05)",
                     backdropFilter: "blur(20px)",
                     WebkitBackdropFilter: "blur(20px)",
-                    boxShadow: diff === 0 ? `0 30px 60px -15px ${pillar.color}40, inset 0 0 0 1px rgba(255,255,255,0.8)` : "0 10px 30px -10px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.5)",
+                    boxShadow: diff === 0 ? `0 30px 60px -15px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.15)` : "0 10px 30px -10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05)",
                     /* border removed to use dynamic shimmer pseudo-border */
                   }}
                 >
@@ -142,8 +142,7 @@ export default function FeaturedPillars({ data, generalTitle }: { data?: any[], 
                   {diff === 0 && <div className={styles.cardBorder} />}
                   
                   <div className={styles.cardInner}>
-                    {/* Glowing background orbs (Volumetric Depth: Pushed back) */}
-                    <div className={styles.cardBg} style={{ background: pillar.color, transform: 'translateZ(-30px)' }}></div>
+                    {/* Glowing background orbs removed as per user request */}
                     
                     {/* Textures and Shapes (Volumetric Depth: Mid layers) */}
                     <div className={styles.cardPattern} style={{ transform: 'translateZ(-10px)' }}></div>
@@ -151,12 +150,11 @@ export default function FeaturedPillars({ data, generalTitle }: { data?: any[], 
                     {/* Glass Reflection Slash */}
                     <div className={styles.glassSlash}></div>
                     
-                    {/* Huge Number Watermark (Volumetric Depth: Pushed forward) */}
-                    <div className={styles.watermark} style={{ transform: 'translateZ(50px)' }}>{pillar.number}</div>
+                    {/* Huge Number Watermark removed as per user request */}
                     
                     {/* Content Container aligned to bottom-left (Volumetric Depth: Floating) */}
                     <div className={styles.cardContent} style={{ transform: 'translateZ(70px)' }}>
-                      <div className={styles.cardIconWrapper} style={{ background: `${pillar.color}20`, color: pillar.color }}>
+                      <div className={styles.cardIconWrapper} style={{ background: `rgba(255,255,255,0.1)`, color: '#ffffff' }}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14"></path>
                           <path d="M12 5l7 7-7 7"></path>
@@ -191,7 +189,6 @@ export default function FeaturedPillars({ data, generalTitle }: { data?: any[], 
               <motion.div 
                 className={styles.subtitle}
                 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } } }}
-                style={{ color: pillarsData[activeIndex]?.color }}
               >
                 {pillarsData[activeIndex]?.subtitle}
               </motion.div>

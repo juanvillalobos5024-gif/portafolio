@@ -48,13 +48,31 @@ export default function Navbar() {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    closeMobileMenu();
+    
+    // Update URL hash without jumping
+    if (window.history.pushState) {
+      window.history.pushState(null, '', hash);
+    } else {
+      window.location.hash = hash;
+    }
+
+    const id = hash.substring(1);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   if (pathname && (pathname.startsWith('/login') || pathname.startsWith('/admin'))) {
     return null;
   }
 
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${mobileMenuOpen ? styles.mobileOpen : ''}`}>
-      <Link href="#inicio" className={styles.logoContainer} aria-label="Ir al inicio" onClick={closeMobileMenu}>
+      <Link href="#inicio" className={styles.logoContainer} aria-label="Ir al inicio" onClick={(e) => handleScrollToSection(e, '#inicio')}>
         <Image
           src="/logo-contex.png" 
           alt="Logotipo oficial de CONTEX Compañía Nacional de Textiles S.A.S."
@@ -80,21 +98,21 @@ export default function Navbar() {
         <Link 
           href="#inicio" 
           className={`${styles.link} ${activeSection === 'inicio' ? styles.active : ''}`}
-          onClick={closeMobileMenu}
+          onClick={(e) => handleScrollToSection(e, '#inicio')}
         >
           Inicio
         </Link>
         <Link 
           href="#nosotros" 
           className={`${styles.link} ${activeSection === 'nosotros' ? styles.active : ''}`}
-          onClick={closeMobileMenu}
+          onClick={(e) => handleScrollToSection(e, '#nosotros')}
         >
           Quiénes Somos
         </Link>
         <Link 
           href="#contacto" 
           className={`${styles.link} ${activeSection === 'contacto' ? styles.active : ''}`}
-          onClick={closeMobileMenu}
+          onClick={(e) => handleScrollToSection(e, '#contacto')}
         >
           Contacto
         </Link>

@@ -5,7 +5,7 @@ import FabricWaveDivider from './FabricWaveDivider';
 import styles from './Hero.module.css';
 import CatalogModal from './CatalogModal';
 import KidsCatalogModal from './KidsCatalogModal';
-import ContactTicker from './ContactTicker';
+
 
 export default function Hero({ data }: { data?: any }) {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
@@ -31,8 +31,8 @@ export default function Hero({ data }: { data?: any }) {
           <Image
             src="/logo-contex.png"
             alt="Logotipo principal de CONTEX Compañía Nacional de Textiles S.A.S."
-            width={600}
-            height={180}
+            width={350}
+            height={105}
             className={styles.heroLogo}
             priority
           />
@@ -55,9 +55,7 @@ export default function Hero({ data }: { data?: any }) {
           <button onClick={() => setIsKidsCatalogOpen(true)} className={styles.btnSecondary}>Catálogo Infantil</button>
         </div>
 
-        <div style={{ marginTop: '3rem', width: '100%' }}>
-          <ContactTicker />
-        </div>
+
       </div>
       
       {/* Divisor suave estilo tela (Pliegues superpuestos) */}

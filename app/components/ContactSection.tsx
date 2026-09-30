@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './ContactSection.module.css';
 import { sendEmail } from '../actions/sendEmail';
+import ContactTicker from './ContactTicker';
 
 export default function ContactSection({ data }: { data?: any }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,6 +19,9 @@ export default function ContactSection({ data }: { data?: any }) {
           ) : (
             <p className={styles.subtitle}>Déjanos tus datos o visítanos en nuestra sede en Barranquilla.</p>
           )}
+          <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+            <ContactTicker />
+          </div>
         </div>
 
         <div className={styles.grid}>
