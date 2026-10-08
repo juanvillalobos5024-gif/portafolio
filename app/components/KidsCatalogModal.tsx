@@ -424,8 +424,8 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
     }
   });
 
-  const hasIndex = !!catalogSettings?.indexHtml;
-  const indexOffset = hasIndex ? 2 : 0;
+  const hasIndex = false; // Forced removal of index and blank page
+  const indexOffset = 0;
   const totalPages = 4 + indexOffset + (Object.keys(kidsLicensesData).length * 2);
 
   return (
@@ -549,9 +549,7 @@ export default function KidsCatalogModal({ isOpen, onClose }: CatalogModalProps)
                       <PageBackground side="left" variant="kids" />
                       <div style={{ position: 'relative', zIndex: 2, height: '100%', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
                         <h2 className={styles.pageTitle}>{data.name}</h2>
-                        <div style={{ backgroundColor: 'rgba(255,255,255,0.4)', padding: '0.4rem', borderRadius: '6px', marginBottom: '0.6rem', marginTop: '0.4rem' }}>
-                          <h3 style={{color: 'var(--contex-green)', fontWeight: 'bold', fontSize: '1rem'}}>★ Licencia Oficial: {data.license}</h3>
-                        </div>
+
 
                         <div className={styles.specsGrid} style={{ marginTop: '0.8rem', marginBottom: '0.8rem' }}>
                           {(catalogData[key]?.features || []).map((feature: any) => (
