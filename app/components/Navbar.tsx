@@ -76,8 +76,8 @@ export default function Navbar() {
         <Image
           src="/logo-contex.png" 
           alt="Logotipo oficial de CONTEX Compañía Nacional de Textiles S.A.S."
-          width={180}
-          height={60}
+          width={120}
+          height={40}
           className={styles.logoImage}
           priority
         />

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   z-index: 1000;
   transition: padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -29,7 +29,7 @@
 
 /* Estado de la barra de navegación al hacer scroll */
 .navbar.scrolled {
-  padding: 1rem 2rem; /* Se hace más delgada al bajar */
+  padding: 0.5rem 2rem; /* Se hace más delgada al bajar */
 }
 
 .navbar.scrolled::before {
@@ -42,13 +42,6 @@
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.4s ease, visibility 0.4s;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.navbar.scrolled .logoContainer {
-  opacity: 1;
-  visibility: visible;
 }
 
 .logoContainer:hover {
@@ -57,13 +50,11 @@
 
 .logoImage {
   object-fit: contain;
-  transform: scale(1.3);
-  transform-origin: left center;
   transition: transform 0.3s ease;
 }
 
 .logoContainer:hover .logoImage {
-  transform: scale(1.35);
+  transform: scale(1.05);
 }
 
 .navLinks {
@@ -154,7 +145,7 @@
   }
 
   .logoImage {
-    width: 130px;
+    width: 100px;
     height: auto;
     transform: scale(1); /* Quitamos el aumento de escala en móvil */
   }

@@ -27,16 +27,6 @@ export default function Hero({ data }: { data?: any }) {
       
       {/* Contenido principal */}
       <div className={styles.content}>
-        <div className={styles.heroLogoWrapper}>
-          <Image
-            src="/logo-contex.png"
-            alt="Logotipo principal de CONTEX Compañía Nacional de Textiles S.A.S."
-            width={350}
-            height={105}
-            className={styles.heroLogo}
-            priority
-          />
-        </div>
         <div className={styles.textContent}>
           <h2 className={styles.heroSubHeading}>{data?.title || "Innovación y excelencia textil."}</h2>
           {data?.subtitle ? (

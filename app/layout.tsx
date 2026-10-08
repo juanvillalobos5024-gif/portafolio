@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import FloatingShopButton from "./components/FloatingShopButton";
 import fs from 'fs';
 import path from 'path';
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -78,6 +79,7 @@ export default function RootLayout({
         <main className="flex-grow w-full overflow-x-hidden max-w-[100%]">
           {children}
         </main>
+        <Footer />
         <FloatingShopButton />
       </body>
     </html>

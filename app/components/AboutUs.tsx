@@ -17,17 +17,7 @@ export default function AboutUs({ data }: { data?: any }) {
           )}
         </div>
         
-        {data?.image && (
-          <div className={styles.imageWrapper}>
-            <Image 
-              src={data.image} 
-              alt={data?.alt || "Acerca de Contex"} 
-              width={500} 
-              height={500} 
-              className={styles.aboutImage}
-            />
-          </div>
-        )}
+
       </div>
     </section>
   );

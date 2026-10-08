@@ -121,6 +121,7 @@ export default function AdminDashboard() {
     featuredPillars: [],
     valueProposition: { title: '', cards: [] },
     contact: { title: '', subtitle: '', email: '', phone: '', address: '' },
+    productGallery: { items: [] },
     mainCatalog: {},
     kidsCatalog: {}
   });
@@ -182,6 +183,16 @@ export default function AdminDashboard() {
             { id: '4', title: data.valueProposition.card4Title || '', desc: data.valueProposition.card4Desc || '' },
           ];
         }
+        if (!data.productGallery) {
+          data.productGallery = {
+            items: [
+              { id: '1', name: "Hamacas", label: "Línea Hotelera Premium", image: "https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+              { id: '2', name: "Toallas", label: "Alta Resistencia", image: "https://images.unsplash.com/photo-1616627547584-bf28cee262db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+              { id: '3', name: "Telary Kids", label: "Licencias Disney y Nickelodeon", image: "https://images.unsplash.com/photo-1560067174-c5a3a8f37060?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+              { id: '4', name: "Edredones", label: "Diseño y Durabilidad", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            ]
+          };
+        }
 
         setContent(data);
         setHistory([JSON.stringify(data)]);
@@ -220,11 +231,13 @@ export default function AdminDashboard() {
   };
 
   const handleChange = (section: string, field: string, value: string) => {
+    if (content[section]?.[field] === value) return; // Prevent infinite loop
     const newContent = { ...content, [section]: { ...content[section], [field]: value } };
     pushHistory(newContent);
   };
 
   const handleNestedChange = (section: string, subSection: string, field: string, value: string) => {
+    if (content[section]?.[subSection]?.[field] === value) return; // Prevent infinite loop
     const newContent = {
       ...content,
       [section]: {
@@ -461,9 +474,31 @@ export default function AdminDashboard() {
     pushHistory(newContent);
   };
 
+  const handleAddGalleryItem = () => {
+    const newContent = { ...content };
+    if (!newContent.productGallery) newContent.productGallery = { items: [] };
+    if (!newContent.productGallery.items) newContent.productGallery.items = [];
+    newContent.productGallery.items.push({ id: Math.random().toString(36).substring(2), name: '', label: '', image: '' });
+    pushHistory(newContent);
+  };
+
+  const handleUpdateGalleryItem = (id: string, field: string, value: string) => {
+    const newContent = { ...content };
+    const items = newContent.productGallery.items;
+    const idx = items.findIndex((i: any) => i.id === id);
+    if(idx !== -1) items[idx][field] = value;
+    pushHistory(newContent);
+  };
+
+  const handleRemoveGalleryItem = (id: string) => {
+    const newContent = { ...content };
+    newContent.productGallery.items = newContent.productGallery.items.filter((i: any) => i.id !== id);
+    pushHistory(newContent);
+  };
+
   const getSectionName = () => {
     if (activeTab === 'general') {
-      const names: any = { hero: 'Banner Principal', about: 'Quiénes Somos', value: 'Por qué elegirnos', contact: 'Contacto', seo: 'SEO Metadatos' };
+      const names: any = { hero: 'Banner Principal', about: 'Quiénes Somos', value: 'Por qué elegirnos', gallery: 'Carrusel de Productos', contact: 'Contacto', seo: 'SEO Metadatos' };
       return names[subTab] || 'Gestión de Contenidos';
     }
     if (activeTab === 'mainCatalog') return 'Portafolio Principal';
@@ -704,9 +739,9 @@ export default function AdminDashboard() {
               <button className={`${styles.subTab} ${subTab === 'hero' ? styles.active : ''}`} onClick={() => setSubTab('hero')}>Inicio (Banners)</button>
               <button className={`${styles.subTab} ${subTab === 'about' ? styles.active : ''}`} onClick={() => setSubTab('about')}>Quiénes Somos</button>
               <button className={`${styles.subTab} ${subTab === 'pillars' ? styles.active : ''}`} onClick={() => setSubTab('pillars')}>Tarjetas</button>
+              <button className={`${styles.subTab} ${subTab === 'gallery' ? styles.active : ''}`} onClick={() => setSubTab('gallery')}>Carrusel Productos</button>
               <button className={`${styles.subTab} ${subTab === 'value' ? styles.active : ''}`} onClick={() => setSubTab('value')}>Por qué elegirnos</button>
               <button className={`${styles.subTab} ${subTab === 'contact' ? styles.active : ''}`} onClick={() => setSubTab('contact')}>Contacto</button>
-              <button className={`${styles.subTab} ${subTab === 'seo' ? styles.active : ''}`} onClick={() => setSubTab('seo')}>SEO Metadatos</button>
             </div>
 
             {subTab === 'hero' && (
@@ -749,23 +784,68 @@ export default function AdminDashboard() {
                   <input type="text" className={styles.input} value={content.about?.title || ''} onChange={e => handleChange('about', 'title', e.target.value)} />
                 </div>
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Imagen Lateral</label>
-                  <div style={{ maxWidth: '400px' }}>
-                    <ImageUploader 
-                      currentImage={content.about?.image}
-                      currentAlt={content.about?.alt}
-                      onAltChange={(val: string) => handleChange('about', 'alt', val)}
-                      onUpload={(e: any) => handleImageUpload('root', 'about', e)}
-                      onUrlChange={(val: string) => handleChange('about', 'image', val)}
-                      onRemove={() => handleChange('about', 'image', '')}
-                      isUploading={isUploadingImage}
-                      hint="Formatos JPG/PNG/WebP, Máx 2MB."
-                    />
-                  </div>
-                </div>
-                <div className={styles.formGroup}>
                   <label className={styles.label}>Contenido Principal</label>
                   <div style={{ backgroundColor: 'white', color: 'black' }}><ReactQuill theme="snow" value={content.about?.bodyHtml || ''} onChange={(val) => handleChange('about', 'bodyHtml', val)} /></div>
+                </div>
+              </div>
+            )}
+
+            {subTab === 'gallery' && (
+              <div className={styles.card}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h2 className={styles.cardTitle} style={{ margin: 0 }}>Carrusel de Productos</h2>
+                  <button onClick={handleAddGalleryItem} style={{ background: 'var(--contex-green)', color: 'black', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                    <Plus size={16} /> Añadir Producto
+                  </button>
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                  {(content.productGallery?.items || []).map((item: any, index: number) => (
+                    <div key={item.id} style={{ border: '1px solid #e2e8f0', padding: '1.5rem', borderRadius: '8px', position: 'relative', background: '#f8fafc' }}>
+                      <button onClick={() => handleRemoveGalleryItem(item.id)} style={{ position: 'absolute', top: '10px', right: '10px', background: '#ef4444', color: 'white', border: 'none', padding: '0.3rem', borderRadius: '4px', cursor: 'pointer' }} title="Eliminar"><X size={14} /></button>
+                      
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1rem' }}>
+                        <div>
+                          <label className={styles.label}>Nombre del Producto</label>
+                          <input type="text" className={styles.input} placeholder="Ej: Hamacas" value={item.name || ''} onChange={e => handleUpdateGalleryItem(item.id, 'name', e.target.value)} />
+                        </div>
+                        <div>
+                          <label className={styles.label}>Etiqueta / Descripción Corta</label>
+                          <input type="text" className={styles.input} placeholder="Ej: Línea Hotelera Premium" value={item.label || ''} onChange={e => handleUpdateGalleryItem(item.id, 'label', e.target.value)} />
+                        </div>
+                      </div>
+                      
+                      <div className={styles.formGroup}>
+                        <label className={styles.label}>Imagen del Producto</label>
+                        <ImageUploader 
+                          currentImage={item.image}
+                          onUpload={async (e: any) => {
+                            if (!e.target.files || e.target.files.length === 0) return;
+                            setIsUploadingImage(true);
+                            const formData = new FormData();
+                            formData.append("file", e.target.files[0]);
+                            try {
+                              const res = await fetch("/api/upload", { method: "POST", body: formData });
+                              const data = await res.json();
+                              if (data.success) {
+                                handleUpdateGalleryItem(item.id, 'image', data.url);
+                              } else {
+                                showToast("Error: " + data.error, "error");
+                              }
+                            } catch (err) {
+                              showToast("Error de red", "error");
+                            } finally {
+                              setIsUploadingImage(false);
+                            }
+                          }}
+                          onUrlChange={(val: string) => handleUpdateGalleryItem(item.id, 'image', val)}
+                          onRemove={() => handleUpdateGalleryItem(item.id, 'image', '')}
+                          isUploading={isUploadingImage}
+                          hint="Se recomiendan imágenes cuadradas o verticales para el carrusel."
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -877,25 +957,6 @@ export default function AdminDashboard() {
               </div>
             )}
 
-            {subTab === 'seo' && (
-              <div className={styles.card}>
-                <h2 className={styles.cardTitle}>Metadatos SEO</h2>
-                <p style={{color: '#64748b', fontSize: '0.9rem', marginBottom: '1.5rem'}}>Configura cómo aparecerá tu página web en Google y al compartir enlaces.</p>
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>Meta Title</label>
-                  <input type="text" className={styles.input} value={content.seo?.title || ''} onChange={e => handleChange('seo', 'title', e.target.value)} placeholder="Ej: Contex | Textiles para Hotel" />
-                  <div className={styles.seoBar}><div className={`${styles.seoBarFill} ${titleSeo.class}`} style={{width: titleSeo.width}}></div></div>
-                  <div className={styles.seoHint}><span>{content.seo?.title?.length || 0} caracteres</span><span>{titleSeo.label} (Ideal: 30-60)</span></div>
-                </div>
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>Meta Description</label>
-                  <textarea className={styles.textarea} value={content.seo?.description || ''} onChange={e => handleChange('seo', 'description', e.target.value)} placeholder="Ej: Somos fabricantes de..." />
-                  <div className={styles.seoBar}><div className={`${styles.seoBarFill} ${descSeo.class}`} style={{width: descSeo.width}}></div></div>
-                  <div className={styles.seoHint}><span>{content.seo?.description?.length || 0} caracteres</span><span>{descSeo.label} (Ideal: 70-160)</span></div>
-                </div>
-                <div className={styles.formGroup}><label className={styles.label}>Keywords</label><input type="text" className={styles.input} placeholder="toallas, contex, hotel, sábanas" value={content.seo?.keywords || ''} onChange={e => handleChange('seo', 'keywords', e.target.value)} /></div>
-              </div>
-            )}
           </>
         )}
 

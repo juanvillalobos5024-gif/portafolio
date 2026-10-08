@@ -389,3 +389,20 @@
   80% { transform: translateX(-80px) rotate(-15deg); opacity: 1; }
   100% { transform: translateX(-80px) rotate(-15deg); opacity: 0; }
 }
+
+.catalogRichText {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.catalogRichText * {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+}
+
+.catalogRichText p {
+  margin-bottom: 0.8rem;
+}

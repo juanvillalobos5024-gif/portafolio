@@ -5,6 +5,7 @@ import AboutUs from "./components/AboutUs";
 import FeaturedPillars from "./components/FeaturedPillars";
 import ValueProposition from "./components/ValueProposition";
 import ContactSection from "./components/ContactSection";
+import ProductGallery from "./components/ProductGallery";
 import Redis from 'ioredis';
 
 export const dynamic = 'force-dynamic';
@@ -39,6 +40,9 @@ export default async function Home() {
       
       {/* 2.5 Líneas de Excelencia / Pilares */}
       <FeaturedPillars data={content?.featuredPillars} generalTitle={content?.featuredPillarsTitle} />
+      
+      {/* 2.7 Muestra de Productos */}
+      <ProductGallery data={content?.productGallery} />
       
       {/* 3. Propuesta de Valor */}
       <ValueProposition data={content?.valueProposition} />

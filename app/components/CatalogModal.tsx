@@ -194,7 +194,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
   });
   const hardcodedKeys = ['romana', 'royal', 'toscana', 'home', 'sonata', 'tropical', 'zafiro'];
   const extraKeys = Object.keys(catalogData || {}).filter(key => !hardcodedKeys.includes(key));
-  const totalPages = 20 + (extraKeys.length * 2);
+  const totalPages = 18 + (extraKeys.length * 2);
 
   // Helper: get selected color for a collection
   const getSelectedColor = (key: string) => selectedColors[key] || 'general';
@@ -541,83 +541,10 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${catalogSettings?.coverImage || '/catalogo/portada_editorial.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }}></div>
               </Page>
 
-              {/* === INTRODUCCIÓN === */}
-              <Page number={2} isLeft={true}>
-                <PageBackground side="left" variant="hotelera" />
-                <div style={{ position: 'relative', zIndex: 2, padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: isMobile ? '1rem' : '2rem', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.5rem' : '1.5rem', lineHeight: 1.1 }}>
-                    Nuestra<br/>Historia
-                  </h2>
-                  {catalogSettings?.historyHtml ? (
-                    <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568', flex: 1 }} dangerouslySetInnerHTML={{ __html: catalogSettings.historyHtml }} />
-                  ) : (
-                    <div style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#4a5568', textAlign: 'justify', flex: 1 }}>
-                      <p style={{ marginBottom: '1rem' }}>
-                        <strong>COMPAÑÍA NACIONAL DE TEXTILES</strong> ha forjado una destacada trayectoria en el sector, consolidándose como referente gracias a su compromiso con la calidad, innovación y sostenibilidad.
-                      </p>
-                      <p style={{ marginBottom: '1rem' }}>
-                        Desde sus inicios, ha tejido un camino de éxito, adaptándose a las tendencias del mercado y destacando por su capacidad para ofrecer productos textiles como hamacas, toallas, almohadas, sábanas, edredones, para el hogar y el sector hotelero.
-                      </p>
-                      <p style={{ marginBottom: '1.5rem' }}>
-                        Somos una empresa en constante avance y, nuestro compromiso con la sostenibilidad se refleja en la producción de hilo reciclado para la elaboración de los productos textiles, abriendo paso hacia una industria más responsable, marcando así el rumbo hacia un futuro textil más ecoamigable.
-                      </p>
-                      
-                      <div style={{ padding: '1.5rem', backgroundColor: 'rgba(212, 233, 12, 0.1)', borderLeft: '4px solid var(--contex-green)', borderRadius: '0 8px 8px 0', marginTop: '2rem' }}>
-                        <p style={{ fontSize: '1.1rem', fontFamily: 'var(--font-playfair)', fontStyle: 'italic', color: 'var(--contex-dark)', margin: 0, textAlign: 'center' }}>
-                          "Convertimos fibras textiles en productos que le dan vida a tus sueños."
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </Page>
-
-              {/* === ÍNDICE === */}
-              <Page number={3} isRight={true}>
-                <PageBackground side="right" variant="hotelera" />
-                <div style={{ position: 'relative', zIndex: 2, padding: '1rem 2rem' }}>
-                  <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: isMobile ? '1rem' : '1.8rem', color: 'var(--contex-dark)', marginBottom: isMobile ? '0.5rem' : '1.5rem', borderBottom: '2px solid var(--contex-green)', paddingBottom: '0.5rem', display: 'inline-block' }}>
-                    Índice
-                  </h2>
-                  
-                  {catalogSettings?.indexHtml ? (
-                    <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#4a5568' }} dangerouslySetInnerHTML={{ __html: catalogSettings.indexHtml }} />
-                  ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.2rem', fontSize: '0.75rem' }}>
-                      <div>
-                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Toallas</h3>
-                        <p style={{ color: '#666', lineHeight: 1.6 }}>
-                          Valencia • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(16)}>Zafiro</span> • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(14)}>Tropical</span> • Fuzzy* • Atenas • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(8)}>Toscana</span> • Doble Rizo • Tapete Clasic • Primax* • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana*</span> • Lisboa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(4)}>Romana</span> • Nativa • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(10)}>Home</span> • Oasis • <span style={{cursor: 'pointer', color: 'var(--contex-dark)', fontWeight: 600}} onClick={() => bookRef.current?.pageFlip().turnToPage(6)}>Royal</span>-Candy* • Tapete Pies • Bata Ziggy
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Cocina</h3>
-                        <p style={{ color: '#666', lineHeight: 1.6 }}>
-                          Limpiones Microfibra • Limpiones Estampados
-                        </p>
-                      </div>
-
-                      <div>
-                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Hamacas</h3>
-                        <p style={{ color: '#666', lineHeight: 1.6 }}>
-                          Típica a Color • Típica Negra • Metalissa • Bordada • Extra Bordada • Familiar a Rayas
-                        </p>
-                      </div>
-
-                      <div>
-                        <h3 style={{ color: 'var(--contex-green)', fontSize: '0.9rem', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Lencería</h3>
-                        <p style={{ color: '#666', lineHeight: 1.6 }}>
-                          Sobrecama Andrea • Sobrecama Domino • Juego de Sábanas Estampado • Almohada Spectra • Almohada Memor
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </Page>
+              
 
               {/* === COLECCIÓN ROMANA === */}
-              <Page number={4} isLeft={true}>
+              <Page number={2} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.romana?.title || 'Colección Romana'}</h2>
@@ -639,7 +566,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 </div>
               </Page>
 
-              <Page number={5} isRight={true}>
+              <Page number={3} isRight={true}>
                 <HoverZoomImage 
                   src={getColorImage('romana', getSelectedColor('romana'), towelImages)} 
                   alt="Toalla Romana"
@@ -655,7 +582,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN ROYAL === */}
-              <Page number={6} isLeft={true}>
+              <Page number={4} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.royal?.title || 'Colección Royal'}</h2>
@@ -678,7 +605,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 </div>
               </Page>
 
-              <Page number={7} isRight={true}>
+              <Page number={5} isRight={true}>
                 <HoverZoomImage 
                   src={getColorImage('royal', getSelectedColor('royal'), royalImages)} 
                   alt="Colección Royal"
@@ -694,7 +621,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN TOSCANA === */}
-              <Page number={8} isLeft={true}>
+              <Page number={6} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.toscana?.title || 'Colección Toscana'}</h2>
@@ -717,7 +644,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                 </div>
               </Page>
 
-              <Page number={9} isRight={true}>
+              <Page number={7} isRight={true}>
                 <HoverZoomImage 
                   src={getColorImage('toscana', getSelectedColor('toscana'), toscanaImages)} 
                   alt="Colección Toscana"
@@ -733,7 +660,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN HOME === */}
-              <Page number={10} isLeft={true}>
+              <Page number={8} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.home?.title || 'Colección Home'}</h2>
@@ -755,7 +682,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                 </div>
               </Page>
-              <Page number={11} isRight={true}>
+              <Page number={9} isRight={true}>
                 <HoverZoomImage src={getColorImage('home', getSelectedColor('home'), homeImages)} alt="Colección Home" className={styles.pageImage} />
                 <PageBackground side="right" variant="hotelera" />
                 <div style={{position: 'absolute', bottom: '10%', right: '5%', zIndex: 11}}>
@@ -767,7 +694,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN SONATA === */}
-              <Page number={12} isLeft={true}>
+              <Page number={10} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.sonata?.title || 'Colección Sonata'}</h2>
@@ -787,7 +714,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                 </div>
               </Page>
-              <Page number={13} isRight={true}>
+              <Page number={11} isRight={true}>
                 <HoverZoomImage src={getColorImage('sonata', getSelectedColor('sonata'), sonataImages)} alt="Colección Sonata" className={styles.pageImage} />
                 <PageBackground side="right" variant="hotelera" />
                 <div style={{position: 'absolute', bottom: '10%', right: '5%', zIndex: 11}}>
@@ -799,7 +726,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN TROPICAL === */}
-              <Page number={14} isLeft={true}>
+              <Page number={12} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.tropical?.title || 'Colección Tropical'}</h2>
@@ -819,7 +746,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                 </div>
               </Page>
-              <Page number={15} isRight={true}>
+              <Page number={13} isRight={true}>
                 <HoverZoomImage src={getColorImage('tropical', getSelectedColor('tropical'), tropicalImages)} alt="Colección Tropical" className={styles.pageImage} />
                 <PageBackground side="right" variant="hotelera" />
                 <div style={{position: 'absolute', bottom: '10%', right: '5%', zIndex: 11}}>
@@ -831,7 +758,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
               </Page>
 
               {/* === COLECCIÓN ZAFIRO === */}
-              <Page number={16} isLeft={true}>
+              <Page number={14} isLeft={true}>
                 <PageBackground side="left" variant="hotelera" />
                 <div style={{ position: 'relative', zIndex: 2, paddingBottom: '3rem' }}>
                   <h2 className={styles.pageTitle}>{catalogData.zafiro?.title || 'Colección Zafiro'}</h2>
@@ -850,7 +777,7 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
                   </div>
                 </div>
               </Page>
-              <Page number={17} isRight={true}>
+              <Page number={15} isRight={true}>
                 <HoverZoomImage src={getColorImage('zafiro', getSelectedColor('zafiro'), zafiroImages)} alt="Colección Zafiro" className={styles.pageImage} />
                 <PageBackground side="right" variant="hotelera" />
                 <div style={{position: 'absolute', bottom: '10%', right: '5%', zIndex: 11}}>
@@ -863,8 +790,8 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
 
               {/* COLECCIONES DINÁMICAS (AÑADIDAS DESDE ADMIN) */}
               {extraKeys.flatMap((key, index) => {
-                const leftPageNum = 18 + (index * 2);
-                const rightPageNum = 19 + (index * 2);
+                const leftPageNum = 16 + (index * 2);
+                const rightPageNum = 17 + (index * 2);
                 const data = catalogData[key];
                 
                 return [
