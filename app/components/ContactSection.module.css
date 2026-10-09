@@ -42,7 +42,6 @@
   font-size: 1.1rem;
   color: #94a3b8; /* Slate-400 for high contrast secondary text */
   max-width: 100%;
-  word-wrap: break-word;
   white-space: normal;
   line-height: 1.5;
 }

@@ -49,6 +49,8 @@
   .tickerItem {
     justify-content: center;
     text-align: center;
+    width: 100%;
+    white-space: normal;
   }
   .tickerSeparator {
     display: none;
