@@ -14,11 +14,7 @@ export default function ContactSection({ data }: { data?: any }) {
         
         <div className={styles.header}>
           <h2 className={styles.title}>{data?.title || "Hablemos de tu Proyecto"}</h2>
-          {data?.subtitle ? (
-            <div className={styles.subtitle} dangerouslySetInnerHTML={{ __html: data.subtitle }} />
-          ) : (
-            <p className={styles.subtitle}>Déjanos tus datos o visítanos en nuestra sede en Barranquilla.</p>
-          )}
+
           <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
             <ContactTicker />
           </div>
