@@ -454,6 +454,36 @@ export default function CatalogModal({ isOpen, onClose }: CatalogModalProps) {
     blanco: '/catalogo/hotelera/blanco.webp',
   };
 
+  useEffect(() => {
+    if (isOpen && dataLoaded) {
+      const allImages = [
+        ...Object.values(towelImages),
+        ...Object.values(royalImages),
+        ...Object.values(toscanaImages),
+        ...Object.values(homeImages),
+        ...Object.values(sonataImages),
+        ...Object.values(tropicalImages),
+        ...Object.values(zafiroImages),
+        ...Object.values(hoteleraImages),
+      ];
+
+      Object.values(catalogData).forEach((col: any) => {
+        if (col.mainImage) allImages.push(col.mainImage);
+        if (col.colors) {
+          col.colors.forEach((c: any) => {
+            if (c.image) allImages.push(c.image);
+          });
+        }
+      });
+
+      const uniqueImages = Array.from(new Set(allImages)).filter(Boolean);
+      uniqueImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [isOpen, dataLoaded, catalogData]);
+
   return (
     <>
       <div className={`${styles.modalOverlay} ${isOpen ? styles.open : ''}`}>

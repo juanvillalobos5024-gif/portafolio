@@ -101,7 +101,7 @@ export default function ProductGallery({ data }: { data?: any }) {
                       href="#" 
                       className={styles.galleryItem}
                       aria-label={`Ver colección de ${product.name}`}
-                      onClick={(e) => handleOpenCatalog(e, product.name)}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <Image 
                         src={product.image}
