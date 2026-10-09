@@ -63,7 +63,7 @@
     flex-direction: row;
     text-align: left;
     align-items: center;
-    gap: 3rem;
+    gap: 1.5rem;
   }
   .cardWrapper:nth-child(1) .cardContent {
     align-items: flex-start;
@@ -71,8 +71,8 @@
   .cardWrapper:nth-child(1) .iconWrapper {
     margin-bottom: 0;
     flex-shrink: 0;
-    width: 100px;
-    height: 100px;
+    width: 65px;
+    height: 65px;
   }
   .cardWrapper:nth-child(4) {
     grid-column: span 2;
@@ -81,7 +81,7 @@
     flex-direction: row-reverse;
     text-align: left;
     align-items: center;
-    gap: 3rem;
+    gap: 1.5rem;
   }
   .cardWrapper:nth-child(4) .cardContent {
     align-items: flex-start;
@@ -89,8 +89,8 @@
   .cardWrapper:nth-child(4) .iconWrapper {
     margin-bottom: 0;
     flex-shrink: 0;
-    width: 100px;
-    height: 100px;
+    width: 65px;
+    height: 65px;
   }
 }
 
@@ -101,8 +101,8 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2rem 2rem;
-  border-radius: 20px;
+  padding: 1.5rem 1.5rem;
+  border-radius: 16px;
   transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.4s ease, border-color 0.4s ease;
   display: flex;
   flex-direction: column;
@@ -176,15 +176,15 @@
 }
 
 .iconWrapper {
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   color: var(--contex-green);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.05);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
@@ -197,9 +197,9 @@
 
 .cardTitle {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--foreground);
   letter-spacing: -0.5px;
   transform: translateZ(20px);
@@ -207,9 +207,9 @@
 
 .cardText {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: rgba(255,255,255,0.7);
-  line-height: 1.7;
+  line-height: 1.5;
   transform: translateZ(10px);
 }
 
